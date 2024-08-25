@@ -5,9 +5,11 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"format": "biome format --write ."
 	},
 	"dependencies": {
+		"grammy": "^1.29.0",
 		"next": "14.2.6",
 		"react": "^18",
 		"react-dom": "^18"
