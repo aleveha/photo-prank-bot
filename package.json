@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
+		"dev": "bun run src/scripts/concurrently.ts",
 		"build": "next build",
 		"start": "next start",
 		"format": "biome format --write ."
@@ -16,9 +16,12 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
+		"@types/bun": "^1.1.8",
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
-		"typescript": "^5"
+		"localtunnel": "^2.0.2",
+		"typescript": "^5",
+		"valibot": "^0.39.0"
 	}
 }
