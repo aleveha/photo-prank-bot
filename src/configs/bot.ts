@@ -40,8 +40,4 @@ export const COMMANDS: BotCommand[] = [
 		command: "start",
 		description: "Start Bot",
 	},
-	{
-		command: "ethical",
-		description: "Ethical Information Channel",
-	},
 ];
