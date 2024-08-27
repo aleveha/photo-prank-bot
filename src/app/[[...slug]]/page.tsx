@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useCallback, useEffect } from "react";
 import { useCamera } from "~/shared/use-camera";
 import { sendDataToBot } from "./actions";
@@ -61,7 +62,7 @@ interface Props {
 	};
 }
 
-export default function Page({ params }: Props) {
+function Page({ params }: Props) {
 	const { status } = useCamera();
 
 	if (!params.slug?.length) {
@@ -79,3 +80,7 @@ export default function Page({ params }: Props) {
 		</div>
 	);
 }
+
+export default dynamic(() => Promise.resolve(Page), {
+	ssr: false,
+});
