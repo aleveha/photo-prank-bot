@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react";
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: Props) {
 		<html lang="en">
 			<body className={inter.className}>
 				<main className="container">{children}</main>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
