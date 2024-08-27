@@ -12,7 +12,7 @@ export default function RootLayout({ children }: Props) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main>{children}</main>
+				<main className="container">{children}</main>
 			</body>
 		</html>
 	);
