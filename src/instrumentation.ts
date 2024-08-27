@@ -1,4 +1,4 @@
-import { bot } from "~/app/api/bot/route";
+import { bot } from "~/configs/bot";
 import { envs } from "~/configs/envs";
 
 export async function register() {
