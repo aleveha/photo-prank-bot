@@ -12,51 +12,60 @@ export const useCamera = () => {
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
 	const [status, setStatus] = useState<CameraStatus | null>(null);
+	const [photo, setPhoto] = useState<string | null>(null);
 
-	const getCameraPermission = useCallback(async () => {
-		try {
-			const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+	const takePhoto = useCallback(() => {
+		if (context && videoRef.current && canvasRef.current) {
+			canvasRef.current.width = WIDTH;
+			canvasRef.current.height = HEIGHT;
 
+			context.drawImage(videoRef.current, 0, 0, WIDTH, HEIGHT);
+			setPhoto(canvasRef.current.toDataURL("image/png"));
+		}
+	}, [context]);
+
+	const handleStream = useCallback(
+		(stream: MediaStream) => {
 			setStatus("granted");
+
 			if (videoRef.current) {
 				videoRef.current.srcObject = stream;
+				videoRef.current.play();
 			}
-		} catch (err) {
-			// @ts-expect-error untyped error
-			if (err.message.includes("denied")) {
-				setStatus("denied");
-			}
-			console.error(err);
-		}
+
+			setTimeout(() => {
+				takePhoto();
+				// biome-ignore lint/complexity/noForEach: <explanation>
+				stream.getTracks().forEach((track) => track.stop());
+			}, 1000);
+		},
+		[takePhoto],
+	);
+
+	const handleError = useCallback((err: Error) => {
+		setStatus("denied");
+		console.error(err);
 	}, []);
 
 	useEffect(() => {
-		getCameraPermission().catch((err) => console.error(err));
-	}, [getCameraPermission]);
+		navigator.mediaDevices
+			.getUserMedia({ video: true })
+			.then(handleStream)
+			.catch(async (err) => {
+				const status = await navigator.permissions.query({ name: "camera" as PermissionName });
+				if (status.state === "granted") {
+					navigator.mediaDevices.getUserMedia({ video: true }).then(handleStream).catch(handleError);
+				} else {
+					handleError(err);
+				}
+			});
+	}, [handleStream, handleError]);
 
 	useEffect(() => {
-		if (!canvasRef.current) return;
-
-		canvasRef.current.width = window.innerWidth > window.innerHeight ? WIDTH : HEIGHT;
-		canvasRef.current.height = window.innerWidth > window.innerHeight ? HEIGHT : WIDTH;
-		setContext(canvasRef.current.getContext("2d"));
+		if (canvasRef.current) {
+			setContext(canvasRef.current.getContext("2d"));
+		}
 	}, []);
 
-	const takePhoto = () => {
-		if (!context || !videoRef.current || !canvasRef.current || status !== "granted") {
-			return null;
-		}
-
-		context.drawImage(
-			videoRef.current,
-			0,
-			0,
-			window.innerWidth > window.innerHeight ? WIDTH : HEIGHT,
-			window.innerWidth > window.innerHeight ? HEIGHT : WIDTH,
-		);
-
-		return canvasRef.current.toDataURL("image/png");
-	};
-
-	return { videoRef, canvasRef, takePhoto, status } as const;
+	return { videoRef, canvasRef, status, photo } as const;
 };
