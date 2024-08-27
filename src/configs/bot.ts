@@ -1,9 +1,11 @@
 import type { BotCommand } from "@grammyjs/types";
-import { Bot } from "grammy";
+import { Bot, type CommandContext, type Context, type HearsContext, Keyboard } from "grammy";
 import { envs } from "./envs";
 
-export const bot = new Bot(envs.TELEGRAM_TOKEN);
-bot.command("start", async (ctx) => {
+const STATIC_KEYBOARD = new Keyboard().text("Start Bot").row().text("Ethical Information Channel").row().persistent();
+
+type StartContext = CommandContext<Context> | HearsContext<Context>;
+async function startHandler(ctx: StartContext) {
 	if (!ctx.from) {
 		await ctx.reply("Unfortunately, I can't proceed at this time.\n\n" + "Please try again.\n\n" + "/start");
 		return;
@@ -28,9 +30,20 @@ bot.command("start", async (ctx) => {
 			"@xByteBlitzX\n@SeeYouIOSVIP\n@xN1ghtmare",
 		{
 			parse_mode: "HTML",
+			reply_markup: STATIC_KEYBOARD,
 		},
 	);
-});
+}
+
+export const bot = new Bot(envs.TELEGRAM_TOKEN);
+
+bot.command("start", startHandler);
+bot.hears("Start Bot", startHandler);
+bot.hears(
+	"Ethical Information Channel",
+	async (ctx) => await ctx.reply("Ethical Information : https://t.me/xByteBlitzX"),
+);
+
 bot.errorBoundary((error) => {
 	console.error("An error occurred in the bot:", error);
 });
