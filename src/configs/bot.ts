@@ -30,3 +30,6 @@ bot.command("start", async (ctx) => {
 		},
 	);
 });
+bot.errorBoundary((error) => {
+	console.error("An error occurred in the bot:", error);
+});
