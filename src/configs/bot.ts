@@ -1,3 +1,4 @@
+import type { BotCommand } from "@grammyjs/types";
 import { Bot } from "grammy";
 import { envs } from "./envs";
 
@@ -33,3 +34,14 @@ bot.command("start", async (ctx) => {
 bot.errorBoundary((error) => {
 	console.error("An error occurred in the bot:", error);
 });
+
+export const COMMANDS: BotCommand[] = [
+	{
+		command: "start",
+		description: "Start Bot",
+	},
+	{
+		command: "ethical",
+		description: "Ethical Information Channel",
+	},
+];
