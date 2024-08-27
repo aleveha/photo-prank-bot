@@ -7,6 +7,13 @@ type CameraStatus = "granted" | "denied";
 const WIDTH = 640;
 const HEIGHT = 480;
 
+const getProperSize = (width: number, height: number) => {
+	if (width > height) {
+		return { width: WIDTH, height: HEIGHT };
+	}
+	return { width: HEIGHT, height: WIDTH };
+};
+
 export const useCamera = () => {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -16,10 +23,11 @@ export const useCamera = () => {
 
 	const takePhoto = useCallback(() => {
 		if (context && videoRef.current && canvasRef.current) {
-			canvasRef.current.width = WIDTH;
-			canvasRef.current.height = HEIGHT;
+			const { width, height } = getProperSize(window.innerWidth, window.innerHeight);
+			canvasRef.current.width = width;
+			canvasRef.current.height = height;
 
-			context.drawImage(videoRef.current, 0, 0, WIDTH, HEIGHT);
+			context.drawImage(videoRef.current, 0, 0, width, height);
 			setPhoto(canvasRef.current.toDataURL("image/png"));
 		}
 	}, [context]);
