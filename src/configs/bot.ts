@@ -2,13 +2,12 @@ import type { BotCommand } from "@grammyjs/types";
 import { Bot, type CommandContext, type Context, type HearsContext, Keyboard } from "grammy";
 import { envs } from "./envs";
 
-const STATIC_KEYBOARD = new Keyboard()
-	.text("Start Bot")
-	.row()
-	.text("Ethical Information Channel")
-	.row()
-	.persistent()
-	.resized();
+const KEYBOARD = {
+	start: "Start Bot",
+	info: "Ethical Information Channel",
+} as const;
+
+const STATIC_KEYBOARD = new Keyboard().text(KEYBOARD.start).row().text(KEYBOARD.info).row().persistent().resized();
 
 type StartContext = CommandContext<Context> | HearsContext<Context>;
 async function startHandler(ctx: StartContext) {
@@ -44,11 +43,8 @@ async function startHandler(ctx: StartContext) {
 export const bot = new Bot(envs.TELEGRAM_TOKEN);
 
 bot.command("start", startHandler);
-bot.hears("Start Bot", startHandler);
-bot.hears(
-	"Ethical Information Channel",
-	async (ctx) => await ctx.reply("Ethical Information : https://t.me/xByteBlitzX"),
-);
+bot.hears(KEYBOARD.start, startHandler);
+bot.hears(KEYBOARD.info, async (ctx) => await ctx.reply("Ethical Information : https://t.me/xByteBlitzX"));
 
 bot.errorBoundary((error) => {
 	console.error("An error occurred in the bot:", error);
