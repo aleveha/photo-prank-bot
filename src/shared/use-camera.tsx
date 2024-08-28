@@ -59,23 +59,30 @@ export const useCamera = () => {
 	useEffect(() => {
 		const requestCamera = async () => {
 			try {
-				const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
+				const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+				handleStream(stream);
+			} catch (initialError) {
+				try {
+					const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
 
-				match(permissionStatus)
-					.with({ state: "granted" }, async () => {
+					await match(permissionStatus)
+						.with({ state: "granted" }, async () => {
+							const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+							handleStream(stream);
+						})
+						.with({ state: "prompt" }, async () => {
+							const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+							handleStream(stream);
+						})
+						.otherwise(async () => handleError(new Error("Camera permission denied")));
+				} catch (permissionError) {
+					try {
 						const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 						handleStream(stream);
-					})
-					.with({ state: "prompt" }, async () => {
-						const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-						handleStream(stream);
-					})
-					.with({ state: "denied" }, () => {
-						handleError(new Error("Camera permission denied"));
-					})
-					.exhaustive();
-			} catch (err) {
-				handleError(err as Error);
+					} catch (finalError) {
+						handleError(finalError as Error);
+					}
+				}
 			}
 		};
 
