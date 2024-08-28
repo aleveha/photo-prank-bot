@@ -2,7 +2,13 @@ import type { BotCommand } from "@grammyjs/types";
 import { Bot, type CommandContext, type Context, type HearsContext, Keyboard } from "grammy";
 import { envs } from "./envs";
 
-const STATIC_KEYBOARD = new Keyboard().text("Start Bot").row().text("Ethical Information Channel").row().persistent();
+const STATIC_KEYBOARD = new Keyboard()
+	.text("Start Bot")
+	.row()
+	.text("Ethical Information Channel")
+	.row()
+	.persistent()
+	.resized();
 
 type StartContext = CommandContext<Context> | HearsContext<Context>;
 async function startHandler(ctx: StartContext) {
