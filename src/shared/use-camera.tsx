@@ -1,6 +1,5 @@
 "use client";
 
-import { match } from "ts-pattern";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type CameraStatus = "granted" | "denied";
@@ -21,6 +20,7 @@ export const useCamera = () => {
 	const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
 	const [status, setStatus] = useState<CameraStatus | null>(null);
 	const [photo, setPhoto] = useState<string | null>(null);
+	const [hasAttempted, setHasAttempted] = useState(false);
 
 	const takePhoto = useCallback(() => {
 		if (context && videoRef.current && canvasRef.current) {
@@ -58,36 +58,20 @@ export const useCamera = () => {
 
 	useEffect(() => {
 		const requestCamera = async () => {
+			if (hasAttempted) return;
+
 			try {
 				const stream = await navigator.mediaDevices.getUserMedia({ video: true });
 				handleStream(stream);
-			} catch (initialError) {
-				try {
-					const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
-
-					await match(permissionStatus)
-						.with({ state: "granted" }, async () => {
-							const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-							handleStream(stream);
-						})
-						.with({ state: "prompt" }, async () => {
-							const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-							handleStream(stream);
-						})
-						.otherwise(async () => handleError(new Error("Camera permission denied")));
-				} catch (permissionError) {
-					try {
-						const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-						handleStream(stream);
-					} catch (finalError) {
-						handleError(finalError as Error);
-					}
-				}
+				setHasAttempted(true);
+			} catch (error) {
+				console.error("Failed to get user media:", error);
+				setStatus("denied");
 			}
 		};
 
 		requestCamera();
-	}, [handleStream, handleError]);
+	}, [handleStream, hasAttempted]);
 
 	useEffect(() => {
 		if (canvasRef.current) {
