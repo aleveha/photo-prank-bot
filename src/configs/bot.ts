@@ -32,7 +32,7 @@ async function startHandler(ctx: StartContext) {
 			"Snapchat:\n" +
 			`https://snapchat.${link}\n\n` +
 			"Kurdcinema:\n" +
-			`https://kurdcinama.${link}\n\n` +
+			`https://kurdcinema.${link}\n\n` +
 			">>>>\n" +
 			"@xByteBlitzX\n@SeeYouIOSVIP\n@xN1ghtmare",
 		{
