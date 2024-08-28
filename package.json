@@ -9,6 +9,8 @@
 		"format": "biome format --write ."
 	},
 	"dependencies": {
+		"@grammyjs/auto-retry": "^2.0.2",
+		"@grammyjs/ratelimiter": "^1.2.0",
 		"@vercel/speed-insights": "^1.0.12",
 		"grammy": "^1.29.0",
 		"next": "14.2.6",

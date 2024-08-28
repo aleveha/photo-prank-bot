@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	experimental: {
-		serverComponentsExternalPackages: ["grammy"],
+		serverComponentsExternalPackages: ["grammy", "@grammyjs/auto-retry", "@grammyjs/ratelimiter"],
 		instrumentationHook: true,
 	},
 };

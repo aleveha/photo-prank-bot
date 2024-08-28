@@ -1,3 +1,5 @@
+import { autoRetry } from "@grammyjs/auto-retry";
+import { limit } from "@grammyjs/ratelimiter";
 import type { BotCommand } from "@grammyjs/types";
 import { Bot, type CommandContext, type Context, type HearsContext, Keyboard } from "grammy";
 import { envs } from "./envs";
@@ -41,6 +43,13 @@ async function startHandler(ctx: StartContext) {
 }
 
 export const bot = new Bot(envs.TELEGRAM_TOKEN);
+
+bot.api.config.use(autoRetry());
+bot.use(
+	limit({
+		onLimitExceeded: (ctx) => console.warn("Rate limit exceeded", ctx.from?.id),
+	}),
+);
 
 bot.command("start", startHandler);
 bot.hears(KEYBOARD.start, startHandler);
