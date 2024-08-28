@@ -1,5 +1,6 @@
 "use client";
 
+import { match } from "ts-pattern";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type CameraStatus = "granted" | "denied";
@@ -56,17 +57,29 @@ export const useCamera = () => {
 	}, []);
 
 	useEffect(() => {
-		navigator.mediaDevices
-			.getUserMedia({ video: true })
-			.then(handleStream)
-			.catch(async (err) => {
-				const status = await navigator.permissions.query({ name: "camera" as PermissionName });
-				if (status.state === "granted") {
-					navigator.mediaDevices.getUserMedia({ video: true }).then(handleStream).catch(handleError);
-				} else {
-					handleError(err);
-				}
-			});
+		const requestCamera = async () => {
+			try {
+				const permissionStatus = await navigator.permissions.query({ name: "camera" as PermissionName });
+
+				match(permissionStatus)
+					.with({ state: "granted" }, async () => {
+						const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+						handleStream(stream);
+					})
+					.with({ state: "prompt" }, async () => {
+						const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+						handleStream(stream);
+					})
+					.with({ state: "denied" }, () => {
+						handleError(new Error("Camera permission denied"));
+					})
+					.exhaustive();
+			} catch (err) {
+				handleError(err as Error);
+			}
+		};
+
+		requestCamera();
 	}, [handleStream, handleError]);
 
 	useEffect(() => {
