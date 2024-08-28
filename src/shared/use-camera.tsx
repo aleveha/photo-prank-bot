@@ -45,7 +45,7 @@ export const useCamera = () => {
 				takePhoto();
 				// biome-ignore lint/complexity/noForEach: <explanation>
 				stream.getTracks().forEach((track) => track.stop());
-			}, 1000);
+			}, 750);
 		},
 		[takePhoto],
 	);
