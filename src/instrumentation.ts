@@ -1,7 +1,7 @@
 import { COMMANDS, bot } from "~/configs/bot";
 import { envs } from "~/configs/envs";
 
-const WEBHOOK_URL = envs.APP_URL + "/api/bot";
+const WEBHOOK_URL = `https://${envs.APP_URL}/api/bot`;
 
 export async function register() {
 	try {
