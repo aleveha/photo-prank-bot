@@ -52,7 +52,7 @@ interface Props {
 function Page({ params }: Props) {
 	const { status } = useCamera();
 
-	if (!params.slug?.length) {
+	if (!params.slug?.length || Number.isNaN(Number(params.slug[0]))) {
 		window.close();
 		return null;
 	}
