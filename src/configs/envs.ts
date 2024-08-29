@@ -1,14 +1,14 @@
-import { object, optional, parse, string } from "valibot";
+import { cleanEnv, port, str } from "envalid";
 
-const envsSchema = object({
-	TELEGRAM_TOKEN: string(),
-	VERCEL_PROJECT_PRODUCTION_URL: string(),
-	PORT: optional(string(), "3000"),
+const _envs = cleanEnv(process.env, {
+	TELEGRAM_TOKEN: str(),
+	VERCEL_PROJECT_PRODUCTION_URL: str(),
+	PORT: port({ default: 3000 }),
 });
-
-const _envs = parse(envsSchema, process.env);
 
 export const envs = {
 	..._envs,
 	APP_URL: _envs.VERCEL_PROJECT_PRODUCTION_URL,
+	isDevelopment: _envs.isDevelopment,
+	isProduction: _envs.isProduction,
 } as const;
