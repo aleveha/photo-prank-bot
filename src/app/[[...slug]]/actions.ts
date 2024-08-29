@@ -1,7 +1,7 @@
 "use server";
 
 import { InputFile } from "grammy";
-import { bot } from "~/configs/bot";
+import { bot } from "~/bot";
 
 interface Props {
 	photo: string;
