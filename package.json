@@ -6,15 +6,20 @@
 		"dev": "bun run src/scripts/concurrently.ts",
 		"build": "next build",
 		"start": "next start",
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"db:g": "bun run --env-file=.env.local drizzle-kit generate --name",
+		"db:m": "bun run --bun drizzle-kit migrate",
+		"db:ui": "bun run --env-file=.env.local drizzle-kit studio"
 	},
 	"dependencies": {
 		"@grammyjs/auto-retry": "^2.0.2",
 		"@grammyjs/ratelimiter": "^1.2.0",
 		"@vercel/speed-insights": "^1.0.12",
+		"drizzle-orm": "^0.33.0",
 		"envalid": "^8.0.0",
 		"grammy": "^1.29.0",
 		"next": "14.2.6",
+		"postgres": "^3.4.4",
 		"react": "^18",
 		"react-dom": "^18"
 	},
@@ -24,6 +29,7 @@
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"drizzle-kit": "^0.24.2",
 		"localtunnel": "^2.0.2",
 		"typescript": "^5"
 	}
