@@ -2,7 +2,7 @@
 const nextConfig = {
 	experimental: {
 		serverComponentsExternalPackages: ["grammy", "@grammyjs/auto-retry", "@grammyjs/ratelimiter"],
-		instrumentationHook: true,
+		// instrumentationHook: true,
 	},
 };
 
