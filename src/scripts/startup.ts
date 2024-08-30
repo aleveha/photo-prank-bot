@@ -25,8 +25,7 @@ export async function startup() {
 	}
 
 	try {
-		const version = envs.PULL_REQUEST_ID ? ` #${envs.PULL_REQUEST_ID}` : "";
-		await bot.api.sendMessage(envs.ADMIN_CHAT_ID, `Запущена новая версия${version}`);
+		await bot.api.sendMessage(envs.ADMIN_CHAT_ID, "Запущена новая версия");
 	} catch (err) {
 		console.error("Failed to send message:", err);
 	}
