@@ -6,7 +6,10 @@ export async function register() {
 
 		const WEBHOOK_URL = `https://${envs.APP_URL}/api/bot`;
 		try {
-			await bot.api.setWebhook(WEBHOOK_URL, { drop_pending_updates: true });
+			await bot.api.setWebhook(WEBHOOK_URL, {
+				allowed_updates: ["my_chat_member", "message"],
+				drop_pending_updates: true,
+			});
 		} catch (err) {
 			console.error("Failed to set webhook", err);
 			return;
