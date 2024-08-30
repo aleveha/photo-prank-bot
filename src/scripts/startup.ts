@@ -3,6 +3,8 @@ import { COMMANDS } from "~/bot/handlers/commands";
 import { envs } from "~/configs/envs";
 
 export async function startup() {
+	console.log("Loaded environment variables:", envs);
+
 	try {
 		await bot.api.setWebhook(`https://${envs.APP_URL}/api/bot`, {
 			allowed_updates: ["my_chat_member", "message"],
