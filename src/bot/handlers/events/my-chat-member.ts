@@ -1,20 +1,6 @@
-import { eq, sql } from "drizzle-orm";
 import type { Filter, NextFunction } from "grammy";
+import { deleteChat } from "~/services/chat.service";
 import type { Context } from "~/bot/types";
-import { database, schema } from "~/configs/database";
-
-const deleteChatQuery = database
-	.delete(schema.chat)
-	.where(eq(schema.chat.id, sql.placeholder("chatId")))
-	.prepare("deleteChatQuery");
-
-async function deleteChat(chatId: number) {
-	try {
-		await deleteChatQuery.execute({ chatId });
-	} catch (err) {
-		console.error("Failed to delete chat", err);
-	}
-}
 
 export async function myChatMember(ctx: Filter<Context, "my_chat_member">, next: NextFunction) {
 	const member = ctx.myChatMember.new_chat_member;
