@@ -1,4 +1,4 @@
-import type { NextFunction } from "grammy";
+import { InlineKeyboard, type NextFunction } from "grammy";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
 import { deleteChat } from "~/services/chat.service";
@@ -19,7 +19,12 @@ export async function disableGroupChats(ctx: Context, next: NextFunction) {
 	}
 
 	try {
-		await ctx.reply("This bot is only available in private chats");
+		await ctx.reply(ctx.t("disable-group-chats-event.message"), {
+			reply_markup: new InlineKeyboard().url(
+				ctx.t("disable-group-chats-event.button"),
+				`https://t.me/${ctx.me.username}?start=`,
+			),
+		});
 		await ctx.leaveChat();
 		await deleteChat(ctx.chat.id);
 	} catch (err) {
@@ -27,8 +32,7 @@ export async function disableGroupChats(ctx: Context, next: NextFunction) {
 			throw err;
 		}
 
-		const messages = ["bot is not a member", "bot was kicked"];
-		if (!messages.some((message) => err.message.includes(message))) {
+		if (!["bot is not a member", "bot was kicked"].some((message) => err.message.includes(message))) {
 			console.error(`Tried to leave group chat ${ctx.chat.id} but failed with:\n`, err);
 		}
 	}

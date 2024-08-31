@@ -2,6 +2,7 @@ import { autoRetry } from "@grammyjs/auto-retry";
 import { Bot } from "grammy";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
+import { i18n } from "~/configs/i18n";
 import { start } from "./handlers/commands/start";
 import { disableGroupChats } from "./handlers/events/disable-group-chats";
 import { myChatMember } from "./handlers/events/my-chat-member";
@@ -13,6 +14,7 @@ export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
 bot.api.config.use(autoRetry());
 
+bot.use(i18n);
 bot.use(disableGroupChats);
 
 bot.on("my_chat_member", myChatMember);

@@ -1,6 +1,6 @@
 import type { Filter, NextFunction } from "grammy";
-import { deleteChat } from "~/services/chat.service";
 import type { Context } from "~/bot/types";
+import { deleteChat } from "~/services/chat.service";
 
 export async function myChatMember(ctx: Filter<Context, "my_chat_member">, next: NextFunction) {
 	const member = ctx.myChatMember.new_chat_member;
@@ -22,14 +22,7 @@ export async function myChatMember(ctx: Filter<Context, "my_chat_member">, next:
 		}
 
 		if (!member.can_send_photos && member.can_send_messages) {
-			await ctx.reply(
-				"*WARNING*\n\n" +
-					"You have restricted me from sending photos\\!\n\n" +
-					"Please note, *I can't function properly without this permission\\!*",
-				{
-					parse_mode: "MarkdownV2",
-				},
-			);
+			await ctx.reply(ctx.t("my-chat-member-event"), { parse_mode: "HTML" });
 			return;
 		}
 

