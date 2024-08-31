@@ -7,4 +7,9 @@ if (!DOMAIN) {
 	throw new Error("Invalid APP_URL environment variable.");
 }
 
-await Promise.all([$`bunx next dev -p ${envs.PORT}`, $`bunx lt -s ${DOMAIN} -p ${envs.PORT}`, $`bun run db:ui`, startup()]);
+await Promise.all([
+	$`bunx next dev -p ${envs.PORT}`,
+	$`bunx lt -s ${DOMAIN} -p ${envs.PORT}`,
+	$`bun run db:ui`,
+	startup(),
+]);
