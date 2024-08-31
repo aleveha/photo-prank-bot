@@ -10,6 +10,7 @@ main {
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
+    background-color: #000000;
 }
 
 h1 {
@@ -24,11 +25,11 @@ h1 {
 }
 
 .spinner {
-    border: 16px solid #FFF2D7;
-    border-top: 16px solid #F98866;
+    border: 8px solid #FFFFFF;
+    border-top: 8px solid #FF8C00;
     border-radius: 50%;
-    width: 160px;
-    height: 160px;
+    width: 80px;
+    height: 80px;
     animation: spin 1s linear infinite;
 }
 
