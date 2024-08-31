@@ -51,11 +51,6 @@ export const useCamera = () => {
 		[takePhoto],
 	);
 
-	const handleError = useCallback((err: Error) => {
-		setStatus("denied");
-		console.error(err);
-	}, []);
-
 	useEffect(() => {
 		const requestCamera = async () => {
 			if (hasAttempted) return;
