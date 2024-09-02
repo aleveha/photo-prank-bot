@@ -1,9 +1,7 @@
 import { InlineKeyboard, type NextFunction } from "grammy";
 import type { Context } from "~/bot/types";
-import { envs } from "~/configs/envs";
-import { deleteChat } from "~/services/chat.service";
 
-export async function disableGroupChats(ctx: Context, next: NextFunction) {
+export async function ignoreGroupChats(ctx: Context, next: NextFunction) {
 	if (!ctx.chat) {
 		return;
 	}
@@ -13,20 +11,14 @@ export async function disableGroupChats(ctx: Context, next: NextFunction) {
 		return;
 	}
 
-	if (ctx.chat.id === envs.ADMIN_CHAT_ID) {
-		await next();
-		return;
-	}
-
 	try {
 		await ctx.reply(ctx.t("disable-group-chats-event.message"), {
+			reply_to_message_id: ctx.msg?.message_id,
 			reply_markup: new InlineKeyboard().url(
 				ctx.t("disable-group-chats-event.button"),
 				`https://t.me/${ctx.me.username}?start=`,
 			),
 		});
-		await ctx.leaveChat();
-		await deleteChat(ctx.chat.id);
 	} catch (err) {
 		if (!(err instanceof Error)) {
 			throw err;
