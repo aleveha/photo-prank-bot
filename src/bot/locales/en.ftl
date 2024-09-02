@@ -27,3 +27,5 @@ privacy-policy-command =
     6. The bot is not intended to be used as a weapon for hacking. Respect other users and their privacy.
 
     By using this bot, you agree to our privacy policy!
+
+    { $url }
