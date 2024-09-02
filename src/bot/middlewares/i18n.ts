@@ -4,5 +4,5 @@ import type { Context } from "~/bot/types";
 
 export const i18n = new I18n<Context>({
 	defaultLocale: "en",
-	directory: path.join(process.cwd(), "/src/locales"),
+	directory: path.join(process.cwd(), "/src/bot/locales"),
 });
