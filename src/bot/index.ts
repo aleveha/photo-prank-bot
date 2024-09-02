@@ -2,7 +2,7 @@ import { autoRetry } from "@grammyjs/auto-retry";
 import { Bot } from "grammy";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
-import { i18n } from "~/configs/i18n";
+import { i18n } from "./configs/i18n";
 import { start } from "./handlers/commands/start";
 import { myChatMember } from "./handlers/events/my-chat-member";
 import { newChatMembers } from "./handlers/events/new-chat-members";
