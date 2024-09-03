@@ -1,5 +1,6 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import { useCallback, useEffect, useState } from "react";
 import { sendPhotoToChat } from "../_actions/send-photo-to-chat";
 import { useCamera } from "../_hooks/use-camera";
@@ -25,6 +26,14 @@ export const Camera = ({ chatId }: CameraProps) => {
 			const ip = await getUserIp();
 			await sendPhotoToChat({ photo: _photo, chatId, ip });
 			setIsTakingPhoto(false);
+			confetti({
+				particleCount: 500,
+				spread: 90,
+				origin: { y: 1 },
+				scalar: 2,
+				startVelocity: 80,
+				ticks: 500,
+			});
 		},
 		[chatId],
 	);
