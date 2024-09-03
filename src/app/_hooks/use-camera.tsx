@@ -2,51 +2,68 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type CameraStatus = "granted" | "denied";
+type CameraStatus = "granted" | "denied" | "prompted";
 
-const WIDTH = 640;
-const HEIGHT = 480;
+const MAX_WIDTH = 640;
 
-const getProperSize = (width: number, height: number) => {
-	if (width > height) {
-		return { width: WIDTH, height: HEIGHT };
+const getProperSize = (stream: MediaStream) => {
+	const track = stream.getVideoTracks()[0];
+	const settings = track.getSettings();
+	let { width, height } = settings;
+
+	if (!width || !height) {
+		return { width: MAX_WIDTH, height: Math.floor((MAX_WIDTH * 3) / 4) };
 	}
-	return { width: HEIGHT, height: WIDTH };
+
+	if (width > MAX_WIDTH) {
+		height = Math.floor((height / width) * MAX_WIDTH);
+		width = MAX_WIDTH;
+	}
+
+	return { width, height };
 };
 
 export const useCamera = () => {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 	const canvasRef = useRef<HTMLCanvasElement | null>(null);
-	const [context, setContext] = useState<CanvasRenderingContext2D | null>(null);
 	const [status, setStatus] = useState<CameraStatus | null>(null);
 	const [photo, setPhoto] = useState<string | null>(null);
 	const [hasAttempted, setHasAttempted] = useState(false);
 
-	const takePhoto = useCallback(() => {
-		if (context && videoRef.current && canvasRef.current) {
-			const { width, height } = getProperSize(window.innerWidth, window.innerHeight);
-			canvasRef.current.width = width;
-			canvasRef.current.height = height;
-
-			context.drawImage(videoRef.current, 0, 0, width, height);
-			setPhoto(canvasRef.current.toDataURL("image/png"));
+	const takePhoto = useCallback((stream: MediaStream) => {
+		if (!videoRef.current || !canvasRef.current) {
+			return;
 		}
-	}, [context]);
+
+		const context = canvasRef.current.getContext("2d");
+		const { width, height } = getProperSize(stream);
+		canvasRef.current.width = width;
+		canvasRef.current.height = height;
+
+		context?.drawImage(videoRef.current, 0, 0, width, height);
+		setPhoto(canvasRef.current.toDataURL("image/png"));
+
+		// biome-ignore lint/complexity/noForEach: <explanation>
+		stream.getTracks().forEach((track) => track.stop());
+
+		if (videoRef.current.srcObject) {
+			videoRef.current.srcObject = null;
+		}
+	}, []);
 
 	const handleStream = useCallback(
 		(stream: MediaStream) => {
 			setStatus("granted");
 
-			if (videoRef.current) {
-				videoRef.current.srcObject = stream;
-				videoRef.current.play();
+			if (!videoRef.current) {
+				return;
 			}
 
-			setTimeout(() => {
-				takePhoto();
-				// biome-ignore lint/complexity/noForEach: <explanation>
-				stream.getTracks().forEach((track) => track.stop());
-			}, 750);
+			videoRef.current.srcObject = stream;
+			videoRef.current.onloadedmetadata = () => {
+				videoRef.current?.play();
+				setTimeout(() => takePhoto(stream), 200);
+			};
 		},
 		[takePhoto],
 	);
@@ -54,6 +71,8 @@ export const useCamera = () => {
 	useEffect(() => {
 		const requestCamera = async () => {
 			if (hasAttempted) return;
+
+			setStatus("prompted");
 
 			try {
 				const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -67,12 +86,6 @@ export const useCamera = () => {
 
 		requestCamera();
 	}, [handleStream, hasAttempted]);
-
-	useEffect(() => {
-		if (canvasRef.current) {
-			setContext(canvasRef.current.getContext("2d"));
-		}
-	}, []);
 
 	return { videoRef, canvasRef, status, photo } as const;
 };
