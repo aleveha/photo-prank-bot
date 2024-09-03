@@ -32,8 +32,11 @@
 		"@types/node": "^20",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"autoprefixer": "^10.4.20",
 		"drizzle-kit": "^0.24.2",
 		"localtunnel": "^2.0.2",
+		"postcss": "^8.4.44",
+		"tailwindcss": "^3.4.10",
 		"typescript": "^5"
 	}
 }

@@ -1,43 +1,15 @@
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply w-screen h-screen flex justify-center overflow-x-hidden bg-black text-white;
+  }
 }
 
-html,
-body,
-main {
-    width: 100vw;
-    overflow-x: hidden;
-    background-color: #000000;
-    color: #FFFFFF;
-}
-
-h1 {
-    text-align: center;
-}
-
-.container {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.spinner {
-    border: 8px solid #FFFFFF;
-    border-top: 8px solid #FF8C00;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+@layer components {
+  .spinner {
+    @apply w-20 h-20 border-8 border-white border-t-orange-600 rounded-full animate-spin;
+  }
 }

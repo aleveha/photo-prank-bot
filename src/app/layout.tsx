@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Props) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main className="container">{children}</main>
+				<main className="w-full h-full container px-6 py-12">{children}</main>
 				<SpeedInsights />
 			</body>
 		</html>
