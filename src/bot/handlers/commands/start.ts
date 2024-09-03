@@ -1,68 +1,16 @@
-import type { CommandContext } from "grammy";
+import { type CommandContext, InlineKeyboard } from "grammy";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
 
-const SOCIAL_MEDIAS = {
-	tiktok: {
-		name: "TikTok",
-		domains: ["tiktok", "m.tiktok", "vm.tiktok", "vt.tiktok"],
-	},
-	instagram: {
-		name: "Instagram",
-		domains: ["instagram", "m.instagram"],
-	},
-	youtube: {
-		name: "YouTube",
-		domains: ["youtube", "m.youtube"],
-	},
-	vk: {
-		name: "VK",
-		domains: ["vk", "m.vk"],
-	},
-	yandex: {
-		name: "Yandex",
-		domains: ["yandex", "ya"],
-	},
-	google: {
-		name: "Google",
-		domains: ["google"],
-	},
-	goldapple: {
-		name: "Gold Apple",
-		domains: ["goldapple"],
-	},
-	lamoda: {
-		name: "Lamoda",
-		domains: ["lamoda"],
-	},
-	steam: {
-		name: "Steam",
-		domains: ["steamcommunity", "steamgames"],
-	},
-	drom: {
-		name: "Drom",
-		domains: ["drom"],
-	},
-	pornhub: {
-		name: "Pornhub",
-		domains: ["pornhub", "m.pornhub", "rt.pornhub", "ru.pornhub"],
-	},
-	onlyfans: {
-		name: "OnlyFans",
-		domains: ["onlyfans", "onlyfans-slivy"],
-	},
-} as const;
-
-type StartContext = CommandContext<Context>;
-
-export async function start(ctx: StartContext) {
-	const link = `${envs.APP_URL}/${ctx.chat.id}`;
-
-	const socialMediasMessage = Object.entries(SOCIAL_MEDIAS)
-		.map(([_, value]) => `<b><u>${value.name}</u></b>:\n` + `https://${value.domains[0]}.${link}`)
-		.join("\n\n");
-
-	await ctx.reply(ctx.t("start-command") + "\n\n" + socialMediasMessage, {
+export async function start(ctx: CommandContext<Context>) {
+	await ctx.reply(ctx.t("start-command.message"), {
 		parse_mode: "HTML",
+		reply_markup: new InlineKeyboard()
+			.text(ctx.t("start-command.get-links-button"), "links")
+			.row()
+			.url(ctx.t("start-command.privacy-policy-button"), `https://${envs.APP_URL}/privacy-policy`)
+			.row()
+			.url(ctx.t("start-command.channel-button"), "https://t.me/make_them_smile_channel")
+			.url(ctx.t("start-command.chat-button"), "https://t.me/make_them_smile_chat"),
 	});
 }
