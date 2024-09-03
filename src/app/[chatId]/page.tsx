@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { checkChat } from "../_actions/check-chat";
+import { checkChatAccessibility } from "~/shared/check-chat-accessibility";
 import { PhotoCapture } from "../_components/photo-capture";
 
 interface Props {
@@ -15,7 +15,7 @@ export default async function Page({ params }: Props) {
 		return notFound();
 	}
 
-	const canSendPhoto = await checkChat(chatId);
+	const canSendPhoto = await checkChatAccessibility(chatId);
 	if (!canSendPhoto) {
 		return notFound();
 	}

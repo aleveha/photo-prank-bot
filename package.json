@@ -11,7 +11,8 @@
 		"db:m": "bun run --bun drizzle-kit migrate",
 		"db:ui": "bun run --env-file=.env.local drizzle-kit studio",
 		"startup": "bun -e '(await import(\"~/scripts/startup.ts\")).startup();'",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"cleanup": "bun run src/scripts/cleanup.ts"
 	},
 	"dependencies": {
 		"@grammyjs/auto-retry": "^2.0.2",
