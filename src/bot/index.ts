@@ -1,17 +1,17 @@
 import { autoRetry } from "@grammyjs/auto-retry";
 import { Bot } from "grammy";
-import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
+import { i18n } from "./configs/i18n";
 import { links as linksCallback } from "./handlers/callbacks/links";
 import { links as linksCommand } from "./handlers/commands/links";
 import { privacyPolicy } from "./handlers/commands/privacy-policy";
 import { start } from "./handlers/commands/start";
 import { myChatMember } from "./handlers/events/my-chat-member";
 import { newChatMembers } from "./handlers/events/new-chat-members";
-import { i18n } from "./middlewares/i18n";
 import { ignoreGroupChats } from "./middlewares/ignore-group-chats";
 import { rateLimiter } from "./middlewares/rate-limiter";
 import { verification } from "./middlewares/verification";
+import type { Context } from "./types";
 
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
