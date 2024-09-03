@@ -1,6 +1,5 @@
 import type { PropsWithChildren } from "react";
-import "./_styles.css";
 
 export default function Layout({ children }: PropsWithChildren) {
-	return <div className="chat_container">{children}</div>;
+	return <div className="w-full h-full flex flex-col justify-center items-center">{children}</div>;
 }

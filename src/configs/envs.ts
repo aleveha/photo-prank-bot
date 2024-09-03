@@ -6,6 +6,7 @@ const _envs = cleanEnv(process.env, {
 	VERCEL_PROJECT_PRODUCTION_URL: str({ default: "mysubdomain.loca.lt" }),
 	PORT: port({ default: 3000 }),
 	DATABASE_URL: str(),
+	NEXT_PUBLIC_BOT_NAME: str(),
 });
 
 export const envs = {
