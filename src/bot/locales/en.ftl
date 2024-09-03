@@ -1,4 +1,9 @@
-start-command = Send one of the links below to your victim to snap a secret photo 📸
+-accept-policy-message = <i>By using this bot, you agree to our /privacy policy!</i>
+
+start-command =
+    { -accept-policy-message }
+
+    Send one of the links below to your victim to snap a secret photo 📸
 
 disable-group-chats-event =
     .message = Unfortunately, I am only available in private chats 🙁
@@ -26,6 +31,6 @@ privacy-policy-command =
 
     6. The bot is not intended to be used as a weapon for hacking. Respect other users and their privacy.
 
-    By using this bot, you agree to our privacy policy!
+    { -accept-policy-message }
 
     { $url }
