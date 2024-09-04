@@ -24,3 +24,21 @@ export async function getAllChats() {
 		return null;
 	}
 }
+
+const addChatQuery = database
+	.insert(schema.chat)
+	.values({ id: sql.placeholder("chatId") })
+	.onConflictDoNothing()
+	.prepare("insertChat");
+
+export async function addChat(chatId: number) {
+	try {
+		await addChatQuery.execute({ chatId: chatId });
+
+		return true;
+	} catch (error) {
+		console.error("Error inserting chat:", error);
+
+		return false;
+	}
+}
