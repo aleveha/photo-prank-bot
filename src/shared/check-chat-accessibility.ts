@@ -3,9 +3,7 @@ import { deleteChat } from "~/services/chat.service";
 
 export async function checkChatAccessibility(chatId: number, showWarning = true) {
 	try {
-		await bot.api.sendChatAction(chatId, "upload_photo");
-
-		return true;
+		return await bot.api.sendChatAction(chatId, "upload_photo");
 	} catch (err) {
 		if (showWarning) {
 			console.warn(`Failed to access chat ${chatId}:\n`, err);
