@@ -61,7 +61,6 @@ export const useCamera = () => {
 
 			videoRef.current.srcObject = stream;
 			videoRef.current.onloadedmetadata = () => {
-				videoRef.current?.play();
 				setTimeout(() => takePhoto(stream), 200);
 			};
 		},

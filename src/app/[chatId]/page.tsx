@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { checkChatAccessibility } from "~/shared/check-chat-accessibility";
 import { PhotoCapture } from "../_components/photo-capture";
@@ -8,7 +9,7 @@ interface Props {
 	};
 }
 
-export default async function Page({ params }: Props) {
+async function Page({ params }: Props) {
 	const chatId = Number(params.chatId);
 
 	if (Number.isNaN(chatId)) {
@@ -22,3 +23,7 @@ export default async function Page({ params }: Props) {
 
 	return <PhotoCapture chatId={chatId} />;
 }
+
+export default dynamic(() => Promise.resolve(Page), {
+	ssr: false,
+});
