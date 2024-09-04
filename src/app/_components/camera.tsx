@@ -16,16 +16,12 @@ async function getUserIp() {
 function getUserDevice() {
 	const userAgent = navigator.userAgent;
 
-	if (/Windows NT/.test(userAgent)) {
+	if (/Windows/.test(userAgent)) {
 		return "Windows";
 	}
 
 	if (/Macintosh/.test(userAgent)) {
 		return "MacOS";
-	}
-
-	if (/Linux/.test(userAgent)) {
-		return "Linux";
 	}
 
 	if (/Android/.test(userAgent)) {
@@ -42,6 +38,10 @@ function getUserDevice() {
 
 	if (/CrOS/.test(userAgent)) {
 		return "ChromeOS";
+	}
+
+	if (/Linux/.test(userAgent)) {
+		return "Linux";
 	}
 
 	return "unknown";
