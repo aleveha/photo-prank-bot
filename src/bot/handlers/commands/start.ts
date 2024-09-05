@@ -10,7 +10,7 @@ export async function start(ctx: CommandContext<Context>) {
 			.row()
 			.url(ctx.t("start-command.privacy-policy-button"), `https://${envs.APP_URL}/privacy-policy`)
 			.row()
-			.url(ctx.t("start-command.channel-button"), "https://t.me/make_them_smile_channel")
+			.url(ctx.t("start-command.channel-button"), `https://t.me/${envs.CHANNEL_ID}`)
 			.url(ctx.t("start-command.chat-button"), "https://t.me/make_them_smile_chat"),
 	});
 }
