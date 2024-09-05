@@ -8,6 +8,8 @@ import { privacyPolicy } from "./handlers/commands/privacy-policy";
 import { start } from "./handlers/commands/start";
 import { myChatMember } from "./handlers/events/my-chat-member";
 import { newChatMembers } from "./handlers/events/new-chat-members";
+import { answerCallbackQuery } from "./middlewares/answer-callback-query";
+import { hasChannelSubscription } from "./middlewares/has-channel-subscription";
 import { ignoreGroupChats } from "./middlewares/ignore-group-chats";
 import { rateLimiter } from "./middlewares/rate-limiter";
 import { verification } from "./middlewares/verification";
@@ -23,9 +25,20 @@ bot.on("my_chat_member", myChatMember);
 bot.on("message:new_chat_members", newChatMembers).use(ignoreGroupChats).use(verification);
 
 bot.command("start").use(rateLimiter).use(ignoreGroupChats).use(verification).use(start);
-bot.command("links").use(rateLimiter).use(ignoreGroupChats).use(verification).use(linksCommand);
+bot.command("links")
+	.use(rateLimiter)
+	.use(ignoreGroupChats)
+	.use(verification)
+	.use(hasChannelSubscription)
+	.use(linksCommand);
 bot.command("privacy").use(rateLimiter).use(ignoreGroupChats).use(verification).use(privacyPolicy);
 
-bot.callbackQuery("links").use(rateLimiter).use(ignoreGroupChats).use(verification).use(linksCallback);
+bot.callbackQuery("links")
+	.use(answerCallbackQuery)
+	.use(rateLimiter)
+	.use(ignoreGroupChats)
+	.use(verification)
+	.use(hasChannelSubscription)
+	.use(linksCallback);
 
 bot.errorBoundary((error) => console.error("An error occurred in the bot:", error));

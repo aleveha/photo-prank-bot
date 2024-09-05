@@ -47,3 +47,11 @@ privacy-policy-command =
     { -accept-policy-message }
 
     { $url }
+
+subscription-check =
+    .message =
+        🤔 It seems <b>you are not subscribed to our channel yet...</b>
+
+        Subscribe using the link below and get your prank links 📸
+    .subscribe-button = 🔉 Subscribe to the channel
+    .check-button = 🔄 Check subscription

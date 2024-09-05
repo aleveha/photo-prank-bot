@@ -3,8 +3,6 @@ import type { Context } from "~/bot/types";
 import { generateLinks } from "../utils/links-generator";
 
 export async function links(ctx: CallbackQueryContext<Context>) {
-	await ctx.answerCallbackQuery();
-
 	if (!ctx.chat) {
 		return;
 	}
