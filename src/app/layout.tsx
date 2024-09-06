@@ -1,4 +1,6 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import type { ReactNode } from "react";
@@ -9,12 +11,17 @@ interface Props {
 	children: ReactNode;
 }
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+	const locale = await getLocale();
+	const messages = await getMessages();
+
 	return (
-		<html lang="en">
+		<html lang={locale}>
 			<body className={inter.className}>
-				<main className="w-full h-full container px-6 py-12">{children}</main>
-				<SpeedInsights />
+				<NextIntlClientProvider messages={messages}>
+					<main className="w-full h-full container px-6 py-12">{children}</main>
+					<SpeedInsights />
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);
