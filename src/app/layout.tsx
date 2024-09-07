@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { LocaleSwitcher } from "~/app/_components/locale-switcher";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 interface Props {
 	children: ReactNode;
