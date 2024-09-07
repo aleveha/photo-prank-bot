@@ -109,6 +109,8 @@ export const Camera = ({ chatId }: CameraProps) => {
 	);
 };
 
-export const CameraNotAllowed = () => (
-	<h1 className="font-bold text-4xl">Allow access to camera to use this website!</h1>
-);
+export const CameraNotAllowed = () => {
+	const t = useTranslations("common");
+
+	return <h1 className="font-bold text-4xl">{t("camera-not-allowed")}</h1>;
+};
