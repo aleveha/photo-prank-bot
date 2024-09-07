@@ -1,5 +1,6 @@
 {
 	"common": {
+		"camera-not-allowed": "Allow access to camera to use this website!",
 		"components": {
 			"locale-switcher": {
 				"label": "Select Language"
