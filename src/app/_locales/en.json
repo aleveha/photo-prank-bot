@@ -10,6 +10,10 @@
 			"ru": "Russian"
 		}
 	},
+	"prank": {
+		"title": "🎉 You got pranked 🎉",
+		"subtitle": "Use <a><u>{botTag}</u></a> to get your unique link and prank your friends! 📸"
+	},
 	"privacy-policy": {
 		"title": "Privacy Policy",
 		"subtitle": "of <a><u>{botTag}</u></a>",

