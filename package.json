@@ -20,14 +20,19 @@
 		"@grammyjs/ratelimiter": "^1.2.0",
 		"@vercel/speed-insights": "^1.0.12",
 		"canvas-confetti": "^1.9.3",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.1",
 		"drizzle-orm": "^0.33.0",
 		"envalid": "^8.0.0",
 		"grammy": "^1.29.0",
+		"lucide-react": "^0.439.0",
 		"next": "14.2.6",
 		"next-intl": "^3.19.1",
 		"postgres": "^3.4.4",
 		"react": "^18",
-		"react-dom": "^18"
+		"react-dom": "^18",
+		"tailwind-merge": "^2.5.2",
+		"tailwindcss-animate": "^1.0.7"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",

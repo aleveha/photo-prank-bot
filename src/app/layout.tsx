@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: Props) {
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale}>
+		<html className="dark" lang={locale}>
 			<body className={inter.className}>
 				<NextIntlClientProvider messages={messages}>
 					<main className="w-full h-full container px-6 py-12">{children}</main>
