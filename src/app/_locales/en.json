@@ -11,6 +11,13 @@
 			"ru": "Russian"
 		}
 	},
+	"not-supported-browser": {
+		"title": "Your browser is not supported",
+		"content": {
+			"tg-browser": "If you open this page from in-app browser (e.g.\u00a0Telegram):<ub>click three dots at the top right corner and choose \"Open in ...\" option.</ub>",
+			"external-browser": "Otherwise, use another modern browser like Chrome, Firefox, or Safari."
+		}
+	},
 	"prank": {
 		"title": "🎉 You got pranked 🎉",
 		"subtitle": "Use <a><u>{botTag}</u></a> to get your unique link and prank your friends! 📸"
