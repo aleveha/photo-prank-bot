@@ -1,4 +1,10 @@
 {
+	"bot": {
+		"photo-message": {
+			"device": "Device",
+			"report-button": "Report"
+		}
+	},
 	"common": {
 		"camera-not-allowed": "Allow access to camera to use this website!",
 		"components": {
