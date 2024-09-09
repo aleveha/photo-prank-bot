@@ -1,7 +1,7 @@
 import { InlineKeyboard, type NextFunction } from "grammy";
 import type { Context } from "~/bot/types";
 
-export async function ignoreGroupChats(ctx: Context, next: NextFunction) {
+export async function privateChatOnly(ctx: Context, next: NextFunction) {
 	if (!ctx.chat) {
 		return;
 	}
