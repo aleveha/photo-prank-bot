@@ -1,5 +1,6 @@
 import { autoRetry } from "@grammyjs/auto-retry";
 import { limit } from "@grammyjs/ratelimiter";
+import { autoQuote } from "@roziscoding/grammy-autoquote";
 import { Bot } from "grammy";
 import { reportChatOnly } from "~/bot/middlewares/report-chat-only";
 import { envs } from "~/configs/envs";
@@ -23,6 +24,7 @@ export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 bot.api.config.use(autoRetry());
 
 bot.use(i18n);
+bot.use(autoQuote({ allowSendingWithoutReply: true }));
 
 bot.on("my_chat_member", myChatMember);
 bot.on("message:new_chat_members", newChatMembers).use(privateChatOnly).use(verification);
