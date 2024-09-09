@@ -3,16 +3,17 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "bun run typecheck && NODE_ENV=development bun run src/scripts/concurrently.ts",
+		"dev": "bun run typecheck && bun --bun startup && bunx next dev",
+		"tunnel": "bunx lt -s mysubdomain -p 3000",
 		"build": "bun run typecheck && bun run db:m && next build && bun run startup",
 		"start": "next start",
 		"format": "biome format --write .",
 		"db:g": "bun run --env-file=.env.local drizzle-kit generate --name",
 		"db:m": "bun run --bun drizzle-kit migrate",
 		"db:ui": "bun run --env-file=.env.local drizzle-kit studio",
-		"startup": "bun -e '(await import(\"~/scripts/startup.ts\")).startup();'",
+		"startup": "bun --bun src/scripts/startup.ts",
 		"typecheck": "tsc --noEmit",
-		"cleanup": "bun run src/scripts/cleanup.ts"
+		"cleanup": "bun --bun src/scripts/cleanup.ts"
 	},
 	"dependencies": {
 		"@grammyjs/auto-retry": "^2.0.2",
