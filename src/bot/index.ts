@@ -13,7 +13,7 @@ import { newChatMembers } from "./handlers/events/new-chat-members";
 import { answerCallbackQuery } from "./middlewares/answer-callback-query";
 import { hasChannelSubscription } from "./middlewares/has-channel-subscription";
 import { ignoreGroupChats } from "./middlewares/ignore-group-chats";
-import { rateLimiter } from "./middlewares/rate-limiter";
+import { DEFAULT_RATE_LIMITER_CONFIG } from "./middlewares/rate-limiter";
 import { verification } from "./middlewares/verification";
 import type { Context } from "./types";
 
@@ -26,18 +26,22 @@ bot.use(i18n);
 bot.on("my_chat_member", myChatMember);
 bot.on("message:new_chat_members", newChatMembers).use(ignoreGroupChats).use(verification);
 
-bot.command("start").use(rateLimiter).use(ignoreGroupChats).use(verification).use(start);
+bot.command("start").use(limit(DEFAULT_RATE_LIMITER_CONFIG)).use(ignoreGroupChats).use(verification).use(start);
 bot.command("links")
-	.use(rateLimiter)
+	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
 	.use(ignoreGroupChats)
 	.use(verification)
 	.use(hasChannelSubscription)
 	.use(linksCommand);
-bot.command("privacy").use(rateLimiter).use(ignoreGroupChats).use(verification).use(privacyPolicy);
+bot.command("privacy")
+	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
+	.use(ignoreGroupChats)
+	.use(verification)
+	.use(privacyPolicy);
 
 bot.callbackQuery("links")
 	.use(answerCallbackQuery)
-	.use(rateLimiter)
+	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
 	.use(ignoreGroupChats)
 	.use(verification)
 	.use(hasChannelSubscription)
