@@ -1,8 +1,10 @@
 import { autoRetry } from "@grammyjs/auto-retry";
+import { limit } from "@grammyjs/ratelimiter";
 import { Bot } from "grammy";
 import { envs } from "~/configs/envs";
 import { i18n } from "./configs/i18n";
 import { links as linksCallback } from "./handlers/callbacks/links";
+import { reportCallback, reportCallbackRateLimitExceeded } from "./handlers/callbacks/report";
 import { links as linksCommand } from "./handlers/commands/links";
 import { privacyPolicy } from "./handlers/commands/privacy-policy";
 import { start } from "./handlers/commands/start";
@@ -40,5 +42,18 @@ bot.callbackQuery("links")
 	.use(verification)
 	.use(hasChannelSubscription)
 	.use(linksCallback);
+
+bot.callbackQuery(["report", "report:0", "report:1"])
+	.use(answerCallbackQuery)
+	.use(ignoreGroupChats)
+	.use(
+		limit({
+			onLimitExceeded: reportCallbackRateLimitExceeded,
+			timeFrame: 15_000,
+			keyGenerator: (ctx) => `${ctx.chat?.id}_${ctx.match}`,
+		}),
+	)
+	.use(verification)
+	.use(reportCallback);
 
 bot.errorBoundary((error) => console.error("An error occurred in the bot:", error));

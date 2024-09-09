@@ -55,3 +55,19 @@ subscription-check =
         Subscribe using the link below and get your prank links 📸
     .subscribe-button = 🔉 Subscribe to the channel
     .check-button = 🔄 Check subscription
+
+report-command =
+    .warning-message =
+        🚨 <b><u>Are you sure you want report this message?</u></b> 🚨
+
+        <b>False reports are strictly prohibited and could lead to being banned!</b>
+    .report-button = 🚨 I'm sure, report!
+    .cancel-button = ❌ No, cancel!
+    .rate-limit-message =
+        <b>You are reporting too frequently!
+
+        Please report reasonably, or you may get banned!</b>
+    .success-message =
+        <b><u>Your report #{ $reportId } has been successfully submitted!</u></b>
+
+        <b>Thank you for helping us maintain a safe community!</b>

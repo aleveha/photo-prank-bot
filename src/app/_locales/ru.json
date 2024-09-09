@@ -1,4 +1,10 @@
 {
+	"bot": {
+		"photo-message": {
+			"device": "Устройство",
+			"report-button": "Пожаловаться"
+		}
+	},
 	"common": {
 		"camera-not-allowed": "Разрешите доступ к камере, чтобы использовать этот веб-сайт!",
 		"components": {

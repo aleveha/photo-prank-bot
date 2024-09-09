@@ -2,6 +2,7 @@ import { cleanEnv, num, str } from "envalid";
 
 const _envs = cleanEnv(process.env, {
 	ADMIN_CHAT_ID: num({ default: -1002167443042 }),
+	REPORT_CHAT_ID: num({ default: -1002335737370 }),
 	TELEGRAM_TOKEN: str(),
 	VERCEL_PROJECT_PRODUCTION_URL: str({ default: "mysubdomain.loca.lt" }),
 	DATABASE_URL: str(),
