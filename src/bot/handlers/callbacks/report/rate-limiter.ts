@@ -5,5 +5,5 @@ import type { Context } from "~/bot/types";
 export async function reportCallbackRateLimitExceeded(ctx: CallbackQueryContext<Context>) {
 	DEFAULT_RATE_LIMITER_CONFIG.onLimitExceeded(ctx);
 
-	await ctx.reply(ctx.t("report-command.rate-limit-message"), { parse_mode: "HTML" });
+	await ctx.reply(ctx.t("report-command.rate-limit-message"));
 }

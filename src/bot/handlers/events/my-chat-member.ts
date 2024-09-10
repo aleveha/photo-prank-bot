@@ -22,7 +22,7 @@ export async function myChatMember(ctx: Filter<Context, "my_chat_member">, next:
 		}
 
 		if (!member.can_send_photos && member.can_send_messages) {
-			await ctx.reply(ctx.t("my-chat-member-event"), { parse_mode: "HTML" });
+			await ctx.reply(ctx.t("my-chat-member-event"));
 			return;
 		}
 

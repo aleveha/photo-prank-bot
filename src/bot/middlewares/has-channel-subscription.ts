@@ -11,7 +11,6 @@ export async function hasChannelSubscription(ctx: Context, next: NextFunction) {
 	const subscribed = await subscribedToChannel(envs.CHANNEL_ID, ctx.from.id);
 	if (!subscribed) {
 		await ctx.reply(ctx.t("subscription-check.message"), {
-			parse_mode: "HTML",
 			reply_markup: new InlineKeyboard()
 				.url(ctx.t("subscription-check.subscribe-button"), `https://t.me/${envs.CHANNEL_ID}`)
 				.row()
