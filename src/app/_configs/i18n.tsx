@@ -1,11 +1,6 @@
 import { getRequestConfig } from "next-intl/server";
 import { getUserLocale } from "../_actions/user-locale";
 
-export const LOCALES = ["en", "ru"] as const;
-export const DEFAULT_LOCALE: Locale = "en";
-
-export type Locale = (typeof LOCALES)[number];
-
 export default getRequestConfig(async () => {
 	const locale = await getUserLocale();
 
