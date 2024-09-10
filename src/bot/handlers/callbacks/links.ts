@@ -7,7 +7,5 @@ export async function links(ctx: CallbackQueryContext<Context>) {
 		return;
 	}
 
-	const socialMediasMessage = generateLinks(ctx.chat.id);
-
-	await ctx.reply(ctx.t("links-command") + "\n\n" + socialMediasMessage, { parse_mode: "HTML" });
+	await ctx.reply(ctx.t("links-command") + "\n\n" + generateLinks(ctx.chat.id));
 }

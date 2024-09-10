@@ -8,7 +8,6 @@ export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 	if (!callbackData.includes(":")) {
 		await ctx.editMessageCaption({
 			caption: ctx.t("report-command.warning-message") + "\n\n" + ctx.msg?.caption,
-			parse_mode: "HTML",
 			reply_markup: new InlineKeyboard()
 				.text(ctx.t("report-command.report-button"), "report:1")
 				.row()
@@ -25,7 +24,6 @@ export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 	if (!doReport) {
 		await ctx.editMessageCaption({
 			caption: originalMessage,
-			parse_mode: "HTML",
 			reply_markup: undefined,
 		});
 
@@ -50,7 +48,6 @@ export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 
 	await ctx.editMessageCaption({
 		caption: ctx.t("report-command.success-message", { reportId }) + "\n\n" + originalMessage,
-		parse_mode: "HTML",
 		reply_markup: undefined,
 	});
 }

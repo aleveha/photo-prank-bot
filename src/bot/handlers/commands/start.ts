@@ -4,7 +4,6 @@ import { envs } from "~/configs/envs";
 
 export async function start(ctx: CommandContext<Context>) {
 	await ctx.reply(ctx.t("start-command.message"), {
-		parse_mode: "HTML",
 		reply_markup: new InlineKeyboard()
 			.text(ctx.t("start-command.get-links-button"), "links")
 			.row()
