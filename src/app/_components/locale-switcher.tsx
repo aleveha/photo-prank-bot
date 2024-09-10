@@ -12,8 +12,8 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "~/app/_components/ui/dropdown-menu";
-import { LOCALES, type Locale } from "~/app/_configs/i18n";
 import { cn } from "~/app/_utils/cn";
+import { LOCALES, type Locale } from "~/configs/i18n";
 
 export const LocaleSwitcher: FC = () => {
 	const t = useTranslations("common");
