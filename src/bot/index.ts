@@ -70,5 +70,3 @@ bot.callbackQuery([/warn:\d+/, /ban:\d+/g])
 	.use(answerCallbackQuery)
 	.use(reportChatOnly)
 	.use(restrictCallbackQuery);
-
-bot.errorBoundary((error) => console.error("An error occurred in the bot:", error));
