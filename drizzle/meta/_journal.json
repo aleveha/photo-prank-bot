@@ -15,6 +15,13 @@
 			"when": 1725923454298,
 			"tag": "0001_add_chat_status",
 			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "7",
+			"when": 1726021245898,
+			"tag": "0002_add_chat_language",
+			"breakpoints": true
 		}
 	]
 }

@@ -1,0 +1,57 @@
+{
+	"id": "559dcefe-85d6-4b61-a22b-b3d85407105c",
+	"prevId": "0820c069-f0cb-4b8b-9a08-77a6ac3b4c57",
+	"version": "7",
+	"dialect": "postgresql",
+	"tables": {
+		"public.chat": {
+			"name": "chat",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "bigint",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "chat_status",
+					"typeSchema": "public",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"language": {
+					"name": "language",
+					"type": "chat_language",
+					"typeSchema": "public",
+					"primaryKey": false,
+					"notNull": false
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		}
+	},
+	"enums": {
+		"public.chat_language": {
+			"name": "chat_language",
+			"schema": "public",
+			"values": ["en", "ru"]
+		},
+		"public.chat_status": {
+			"name": "chat_status",
+			"schema": "public",
+			"values": ["warned", "banned"]
+		}
+	},
+	"schemas": {},
+	"sequences": {},
+	"_meta": {
+		"columns": {},
+		"schemas": {},
+		"tables": {}
+	}
+}

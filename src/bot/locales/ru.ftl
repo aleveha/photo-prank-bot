@@ -101,3 +101,11 @@ restrict-command =
         ❌ <b><u>Вы были заблокированы за нарушение правил</u></b>
     .successfully-banned-message =
         ❌ <b>User has been banned!</b>
+
+language-command =
+    .choose-option-message = 🌐 Выберите язык:
+    .en-button = 🇬🇧 Aнглийский
+    .ru-button = 🇷🇺 Русский
+    .same-language-message = 🤔 Вы уже используете этот язык!
+    .success-message = 🌐 Ваш язык был успешно изменен!
+    .error-message = 🚫 Не удалось изменить язык!
