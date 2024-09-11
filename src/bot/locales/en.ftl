@@ -71,6 +71,8 @@ report-command =
         <b><u>Your report #{ $reportId } has been successfully submitted!</u></b>
 
         <b>Thank you for helping us maintain a safe community!</b>
+    .report-violation-button = 🚨 Report violation
+    .report-spam-button = 📢 Report spam
 
 -violations-continues-message = If user continues to violate the rules, you can ban them.
 restrict-command =
