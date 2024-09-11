@@ -71,3 +71,34 @@ report-command =
         <b><u>Your report #{ $reportId } has been successfully submitted!</u></b>
 
         <b>Thank you for helping us maintain a safe community!</b>
+
+-violations-continues-message = If user continues to violate the rules, you can ban them.
+restrict-command =
+    .database-error-message = 🚫 <b>Database error!</b>
+    .chat-not-found-message =
+        ❌ <b>Chat not found in database!</b> ❌
+
+        Probably bot is already blocked by this user. No futher action needed.
+    .already-warned-message =
+        ⚠️ <b>This user has already been warned!</b> ⚠️
+
+        <b>Another warning has been sent anyway!</b>
+
+        { -violations-continues-message }
+    .already-banned-message =
+        ❌ <b>This user has already been banned!</b> ❌
+
+        No further action needed.
+    .successfully-warned-message =
+        ⚠️ <b>User has been warned!</b> ⚠️
+
+        { -violations-continues-message }
+    .warning-message =
+        ⚠️ <b><u>Warning!</u></b> ⚠️
+
+        <b>You have been warned for violating the rules (e.g. false complaints).
+        If you continue to violate the rules, you will be banned.</b>
+    .ban-message =
+        ❌ <b><u>You have been banned for violating the rules</u></b> ❌
+    .successfully-banned-message =
+        ❌ <b>User has been banned!</b> ❌

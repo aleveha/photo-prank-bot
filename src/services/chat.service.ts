@@ -1,5 +1,5 @@
 import { eq, sql } from "drizzle-orm";
-import { database, schema } from "~/configs/database";
+import { type InsertChat, database, schema } from "~/configs/database";
 
 const deleteChatQuery = database
 	.delete(schema.chat)
@@ -29,7 +29,7 @@ const addChatQuery = database
 	.insert(schema.chat)
 	.values({ id: sql.placeholder("chatId") })
 	.onConflictDoNothing()
-	.prepare("insertChat");
+	.prepare("insertChatQuery");
 
 export async function addChat(chatId: number) {
 	try {
@@ -40,5 +40,36 @@ export async function addChat(chatId: number) {
 		console.error("Error inserting chat:", error);
 
 		return false;
+	}
+}
+
+const getChatQuery = database.query.chat
+	.findFirst({ where: eq(schema.chat.id, sql.placeholder("chatId")) })
+	.prepare("getChatQuery");
+
+export async function getChat(chatId: number) {
+	try {
+		return await getChatQuery.execute({ chatId });
+	} catch (error) {
+		console.error("Error getting chat:", error);
+
+		return null;
+	}
+}
+
+type UpdateChatData = Partial<Omit<InsertChat, "id">>;
+
+export async function updateChat(id: number, data: UpdateChatData) {
+	try {
+		const results = await database.update(schema.chat).set(data).where(eq(schema.chat.id, id)).returning();
+		if (!results.length) {
+			return undefined;
+		}
+
+		return results[0];
+	} catch (error) {
+		console.error("Error updating chat:", error);
+
+		return null;
 	}
 }

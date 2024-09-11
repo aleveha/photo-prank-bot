@@ -3,11 +3,11 @@ import { parseMode } from "@grammyjs/parse-mode";
 import { limit } from "@grammyjs/ratelimiter";
 import { autoQuote } from "@roziscoding/grammy-autoquote";
 import { Bot } from "grammy";
-import { reportChatOnly } from "~/bot/middlewares/report-chat-only";
 import { envs } from "~/configs/envs";
 import { i18n } from "./configs/i18n";
 import { links as linksCallback } from "./handlers/callbacks/links";
 import { reportCallback, reportCallbackRateLimitExceeded } from "./handlers/callbacks/report";
+import { restrictCallbackQuery } from "./handlers/callbacks/restrict";
 import { links as linksCommand } from "./handlers/commands/links";
 import { privacyPolicy } from "./handlers/commands/privacy-policy";
 import { start } from "./handlers/commands/start";
@@ -17,6 +17,7 @@ import { answerCallbackQuery } from "./middlewares/answer-callback-query";
 import { hasChannelSubscription } from "./middlewares/has-channel-subscription";
 import { privateChatOnly } from "./middlewares/private-chat-only";
 import { DEFAULT_RATE_LIMITER_CONFIG } from "./middlewares/rate-limiter";
+import { reportChatOnly } from "./middlewares/report-chat-only";
 import { verification } from "./middlewares/verification";
 import type { Context } from "./types";
 
@@ -64,5 +65,10 @@ bot.callbackQuery(["report", "report:0", "report:1"])
 	)
 	.use(verification)
 	.use(reportCallback);
+
+bot.callbackQuery([/warn:\d+/, /ban:\d+/g])
+	.use(answerCallbackQuery)
+	.use(reportChatOnly)
+	.use(restrictCallbackQuery);
 
 bot.errorBoundary((error) => console.error("An error occurred in the bot:", error));
