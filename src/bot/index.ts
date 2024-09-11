@@ -8,7 +8,11 @@ import { LOCALES } from "~/configs/i18n";
 import { i18n } from "./configs/i18n";
 import { language as languageCallback } from "./handlers/callbacks/language";
 import { links as linksCallback } from "./handlers/callbacks/links";
-import { reportCallback, reportCallbackRateLimitExceeded } from "./handlers/callbacks/report";
+import {
+	REPORT_CALLBACK_QUERY_TRIGGER,
+	reportCallback,
+	reportCallbackRateLimitExceeded,
+} from "./handlers/callbacks/report";
 import { restrictCallbackQuery } from "./handlers/callbacks/restrict";
 import { language as languageCommand } from "./handlers/commands/language";
 import { links as linksCommand } from "./handlers/commands/links";
@@ -71,7 +75,7 @@ bot.callbackQuery(new RegExp(`language:(${LOCALES.join("|")})`))
 	.use(verification)
 	.use(languageCallback);
 
-bot.callbackQuery(["report", "report:0", "report:1"])
+bot.callbackQuery(REPORT_CALLBACK_QUERY_TRIGGER)
 	.use(answerCallbackQuery)
 	.use(privateChatOnly)
 	.use(

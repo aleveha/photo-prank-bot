@@ -2,7 +2,8 @@
 	"bot": {
 		"photo-message": {
 			"device": "Device",
-			"report-button": "Report"
+			"report-violation-button": "🚨 Report violation",
+			"report-spam-button": "📢 Report spam"
 		}
 	},
 	"common": {

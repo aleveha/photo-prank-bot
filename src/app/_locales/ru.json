@@ -2,7 +2,8 @@
 	"bot": {
 		"photo-message": {
 			"device": "Устройство",
-			"report-button": "Пожаловаться"
+			"report-violation-button": "🚨 Сообщить о нарушении",
+			"report-spam-button": "📢 Сообщить о спаме"
 		}
 	},
 	"common": {
