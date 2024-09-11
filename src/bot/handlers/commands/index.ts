@@ -13,4 +13,8 @@ export const COMMANDS: BotCommand[] = [
 		command: "privacy",
 		description: "Learn more about our privacy policy!",
 	},
+	{
+		command: "language",
+		description: "Change the language 🌐",
+	},
 ];

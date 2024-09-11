@@ -102,3 +102,11 @@ restrict-command =
         ❌ <b><u>You have been banned for violating the rules</u></b> ❌
     .successfully-banned-message =
         ❌ <b>User has been banned!</b> ❌
+
+language-command =
+    .choose-option-message = 🌐 Select your language:
+    .en-button = 🇬🇧 English
+    .ru-button = 🇷🇺 Russian
+    .same-language-message = 🤔 You are already using this language!
+    .success-message = 🌐 Your language has been successfully changed!
+    .error-message = 🚫 An error occurred while changing the language!
