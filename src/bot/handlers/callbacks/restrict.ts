@@ -1,5 +1,4 @@
 import type { CallbackQueryContext } from "grammy";
-import { bot } from "~/bot";
 import { i18n } from "~/bot/configs/i18n";
 import type { Context } from "~/bot/types";
 import { DEFAULT_LOCALE } from "~/configs/i18n";
@@ -32,14 +31,10 @@ export async function restrictCallbackQuery(ctx: CallbackQueryContext<Context>) 
 
 	const { user } = await ctx.api.getChatMember(chatId, chatId);
 
-	// use line below when grammy-autoquote plugin is updated
-	// await ctx.api.sendMessage(chat.id, i18n.t(user.language_code ?? DEFAULT_LOCALE, "restrict-command.warning-message"), { reply_parameters: undefined });
-	await bot.api.sendMessage(
+	await ctx.api.sendMessage(
 		chat.id,
-		i18n.t(
-			user.language_code ?? DEFAULT_LOCALE,
-			action === "warn" ? "restrict-command.warning-message" : "restrict-command.ban-message",
-		),
+		i18n.t(user.language_code ?? DEFAULT_LOCALE, "restrict-command.warning-message"),
+		{ reply_parameters: undefined },
 	);
 
 	if (chat.status === "warned" && action === "warn") {
