@@ -23,7 +23,7 @@ export async function sendPhotoToChat({ photo, chatId, ip, device }: SendPhotoTo
 				.text(t("report-violation-button"), `report:${REPORT_REASONS.violation}`)
 				.row()
 				.text(t("report-spam-button"), `report:${REPORT_REASONS.spam}`)
-				.row(),
+				.row()
 		});
 	} catch (err) {
 		console.error(`Failed to send photo to chat ${chatId}:\n`, err);

@@ -7,12 +7,12 @@ const _envs = cleanEnv(process.env, {
 	VERCEL_PROJECT_PRODUCTION_URL: str({ default: "mysubdomain.loca.lt" }),
 	DATABASE_URL: str(),
 	NEXT_PUBLIC_BOT_NAME: str({ default: "make_them_smile_bot" }),
-	CHANNEL_ID: str({ default: "make_them_smile_channel" }),
+	CHANNEL_ID: str({ default: "make_them_smile_channel" })
 });
 
 export const envs = {
 	..._envs,
 	APP_URL: _envs.VERCEL_PROJECT_PRODUCTION_URL,
 	isDevelopment: _envs.isDevelopment,
-	isProduction: _envs.isProduction,
+	isProduction: _envs.isProduction
 } as const;

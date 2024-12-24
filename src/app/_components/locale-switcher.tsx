@@ -10,7 +10,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuTrigger,
+	DropdownMenuTrigger
 } from "~/app/_components/ui/dropdown-menu";
 import { cn } from "~/app/_utils/cn";
 import { LOCALES, type Locale } from "~/configs/i18n";

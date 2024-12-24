@@ -64,7 +64,7 @@ export const useCamera = () => {
 				setTimeout(() => takePhoto(stream), 200);
 			};
 		},
-		[takePhoto],
+		[takePhoto]
 	);
 
 	useEffect(() => {

@@ -8,7 +8,7 @@ export async function subscribedToChannel(channelId: string, userId: number) {
 		try {
 			const { status } = await bot.api.getChatMember(
 				channelId.startsWith("@") ? channelId : `@${channelId}`,
-				userId,
+				userId
 			);
 
 			return VALID_STATUSES.includes(status);

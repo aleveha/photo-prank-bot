@@ -8,7 +8,7 @@ const RULES = [
 	"data-privacy",
 	"prohibited-content",
 	"false-complaints",
-	"respectful-use",
+	"respectful-use"
 ] as Rules[];
 
 export default function Page() {
@@ -29,7 +29,7 @@ export default function Page() {
 						>
 							{content}
 						</a>
-					),
+					)
 				})}
 			</h2>
 			<ol className="space-y-4 [&_h3]:font-bold [&_h3]:inline [&_h3]:text-lg [&_p]:leading-loose">

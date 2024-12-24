@@ -14,13 +14,13 @@ export async function hasChannelSubscription(ctx: Context, next: NextFunction) {
 			reply_markup: new InlineKeyboard()
 				.url(ctx.t("subscription-check.subscribe-button"), `https://t.me/${envs.CHANNEL_ID}`)
 				.row()
-				.text(ctx.t("subscription-check.check-button"), "links"),
+				.text(ctx.t("subscription-check.check-button"), "links")
 		});
 		return;
 	}
 
 	const isCheckMessage = ctx.msg?.reply_markup?.inline_keyboard.some((row) =>
-		row.some((button) => button.text === ctx.t("subscription-check.check-button")),
+		row.some((button) => button.text === ctx.t("subscription-check.check-button"))
 	);
 	if (isCheckMessage) {
 		try {

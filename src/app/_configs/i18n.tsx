@@ -9,7 +9,7 @@ export default getRequestConfig(async () => {
 		messages: (await import(`../_locales/${locale}.json`)).default,
 		defaultTranslationValues: {
 			b: (content) => <span className="font-bold">{content}</span>,
-			u: (content) => <span className="underline underline-offset-4">{content}</span>,
-		},
+			u: (content) => <span className="underline underline-offset-4">{content}</span>
+		}
 	};
 });

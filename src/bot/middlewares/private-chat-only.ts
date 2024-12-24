@@ -15,8 +15,8 @@ export async function privateChatOnly(ctx: Context, next: NextFunction) {
 		await ctx.reply(ctx.t("disable-group-chats-event.message"), {
 			reply_markup: new InlineKeyboard().url(
 				ctx.t("disable-group-chats-event.button"),
-				`https://t.me/${ctx.me.username}?start=`,
-			),
+				`https://t.me/${ctx.me.username}?start=`
+			)
 		});
 	} catch (err) {
 		if (!(err instanceof Error)) {

@@ -33,5 +33,5 @@ export const i18n = new I18n<Context>({
 		}
 
 		return DEFAULT_LOCALE;
-	},
+	}
 });

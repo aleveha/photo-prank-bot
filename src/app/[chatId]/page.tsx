@@ -25,5 +25,5 @@ async function Page({ params }: Props) {
 }
 
 export default dynamic(() => Promise.resolve(Page), {
-	ssr: false,
+	ssr: false
 });

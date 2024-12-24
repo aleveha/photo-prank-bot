@@ -24,7 +24,7 @@ export async function restrictCallbackQuery(ctx: CallbackQueryContext<Context>) 
 	if (chat.status === "banned") {
 		await ctx.editMessageCaption({
 			caption: ctx.t("restrict-command.already-banned-message") + "\n\n" + ctx.msg?.caption,
-			reply_markup: undefined,
+			reply_markup: undefined
 		});
 		return;
 	}
@@ -35,9 +35,9 @@ export async function restrictCallbackQuery(ctx: CallbackQueryContext<Context>) 
 		chat.id,
 		i18n.t(
 			user.language_code ?? DEFAULT_LOCALE,
-			action === "warn" ? "restrict-command.warning-message" : "restrict-command.ban-message",
+			action === "warn" ? "restrict-command.warning-message" : "restrict-command.ban-message"
 		),
-		{ reply_parameters: undefined },
+		{ reply_parameters: undefined }
 	);
 
 	if (chat.status === "warned" && action === "warn") {
@@ -64,6 +64,6 @@ export async function restrictCallbackQuery(ctx: CallbackQueryContext<Context>) 
 
 	await ctx.editMessageCaption({
 		caption: ctx.t("restrict-command.successfully-banned-message") + "\n\n" + ctx.msg?.caption,
-		reply_markup: undefined,
+		reply_markup: undefined
 	});
 }
