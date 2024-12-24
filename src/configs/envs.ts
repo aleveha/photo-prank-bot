@@ -4,7 +4,7 @@ const _envs = cleanEnv(process.env, {
 	ADMIN_CHAT_ID: num({ default: -1002167443042 }),
 	REPORT_CHAT_ID: num({ default: -1002335737370 }),
 	TELEGRAM_TOKEN: str(),
-	VERCEL_PROJECT_PRODUCTION_URL: str({ default: "mysubdomain.loca.lt" }),
+	VERCEL_PROJECT_PRODUCTION_URL: str(),
 	DATABASE_URL: str(),
 	NEXT_PUBLIC_BOT_NAME: str({ default: "make_them_smile_bot" }),
 	CHANNEL_ID: str({ default: "make_them_smile_channel" })
