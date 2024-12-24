@@ -11,7 +11,7 @@ import { links as linksCallback } from "./handlers/callbacks/links";
 import {
 	REPORT_CALLBACK_QUERY_TRIGGER,
 	reportCallback,
-	reportCallbackRateLimitExceeded,
+	reportCallbackRateLimitExceeded
 } from "./handlers/callbacks/report";
 import { restrictCallbackQuery } from "./handlers/callbacks/restrict";
 import { language as languageCommand } from "./handlers/commands/language";
@@ -82,8 +82,8 @@ bot.callbackQuery(REPORT_CALLBACK_QUERY_TRIGGER)
 		limit({
 			onLimitExceeded: reportCallbackRateLimitExceeded,
 			timeFrame: 15_000,
-			keyGenerator: (ctx) => `${ctx.chat?.id}_${ctx.match}`,
-		}),
+			keyGenerator: (ctx) => `${ctx.chat?.id}_${ctx.match}`
+		})
 	)
 	.use(verification)
 	.use(reportCallback);

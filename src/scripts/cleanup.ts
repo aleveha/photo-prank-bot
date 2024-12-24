@@ -16,7 +16,7 @@ if (allChats.length === 0) {
 console.info(
 	`Chats in database before cleanup: ${allChats.length}\n` +
 		`Group chats: ${allChats.filter((chat) => chat.id < 0).length}\n` +
-		`Private chats: ${allChats.filter((chat) => chat.id > 0).length}\n`,
+		`Private chats: ${allChats.filter((chat) => chat.id > 0).length}\n`
 );
 
 console.info("Deleting chats...");
@@ -47,7 +47,7 @@ if (!chatsAfterCleanup) {
 console.info(
 	`\nChats in database after cleanup: ${chatsAfterCleanup.length}\n` +
 		`Group chats: ${chatsAfterCleanup.filter((chat) => chat.id < 0).length}\n` +
-		`Private chats: ${chatsAfterCleanup.filter((chat) => chat.id > 0).length}\n`,
+		`Private chats: ${chatsAfterCleanup.filter((chat) => chat.id > 0).length}\n`
 );
 
 process.exit(0);

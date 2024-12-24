@@ -3,52 +3,52 @@ import { envs } from "~/configs/envs";
 const SOCIAL_MEDIAS = {
 	tiktok: {
 		name: "TikTok",
-		domains: ["tiktok", "m.tiktok", "vm.tiktok", "vt.tiktok"],
+		domains: ["tiktok", "m.tiktok", "vm.tiktok", "vt.tiktok"]
 	},
 	instagram: {
 		name: "Instagram",
-		domains: ["instagram", "m.instagram"],
+		domains: ["instagram", "m.instagram"]
 	},
 	youtube: {
 		name: "YouTube",
-		domains: ["youtube", "m.youtube"],
+		domains: ["youtube", "m.youtube"]
 	},
 	vk: {
 		name: "VK",
-		domains: ["vk", "m.vk"],
+		domains: ["vk", "m.vk"]
 	},
 	yandex: {
 		name: "Yandex",
-		domains: ["yandex", "ya"],
+		domains: ["yandex", "ya"]
 	},
 	google: {
 		name: "Google",
-		domains: ["google"],
+		domains: ["google"]
 	},
 	goldapple: {
 		name: "Gold Apple",
-		domains: ["goldapple"],
+		domains: ["goldapple"]
 	},
 	lamoda: {
 		name: "Lamoda",
-		domains: ["lamoda"],
+		domains: ["lamoda"]
 	},
 	steam: {
 		name: "Steam",
-		domains: ["steamcommunity", "steamgames"],
+		domains: ["steamcommunity", "steamgames"]
 	},
 	drom: {
 		name: "Drom",
-		domains: ["drom"],
+		domains: ["drom"]
 	},
 	pornhub: {
 		name: "Pornhub",
-		domains: ["pornhub", "m.pornhub", "rt.pornhub", "ru.pornhub"],
+		domains: ["pornhub", "m.pornhub", "rt.pornhub", "ru.pornhub"]
 	},
 	onlyfans: {
 		name: "OnlyFans",
-		domains: ["onlyfans", "onlyfans-slivy"],
-	},
+		domains: ["onlyfans", "onlyfans-slivy"]
+	}
 } as const;
 
 export function generateLinks(chatId: number) {

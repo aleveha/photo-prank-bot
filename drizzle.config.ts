@@ -6,9 +6,9 @@ export default defineConfig({
 	out: "./drizzle",
 	dialect: "postgresql",
 	dbCredentials: {
-		url: envs.DATABASE_URL,
+		url: envs.DATABASE_URL
 	},
 	introspect: {
-		casing: "camel",
-	},
+		casing: "camel"
+	}
 });

@@ -10,7 +10,7 @@ export const chatLanguageEnum = pgEnum("chat_language", LOCALES);
 export const chat = pgTable("chat", {
 	id: bigint("id", { mode: "number" }).primaryKey().notNull(),
 	status: chatStatusEnum("status").$type<ChatStatus>(),
-	language: chatLanguageEnum("language").$type<Locale>(),
+	language: chatLanguageEnum("language").$type<Locale>()
 });
 
 export type InsertChat = typeof chat.$inferInsert;

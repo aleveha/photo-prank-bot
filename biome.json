@@ -27,6 +27,11 @@
 		"indentWidth": 4,
 		"lineWidth": 120
 	},
+	"javascript": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	},
 	"files": {
 		"ignore": ["node_modules", ".next", ".idea", "public"]
 	}

@@ -70,10 +70,10 @@ export const Camera = ({ chatId }: CameraProps) => {
 				origin: { y: 1 },
 				scalar: 2,
 				startVelocity: 80,
-				ticks: 500,
+				ticks: 500
 			});
 		},
-		[chatId],
+		[chatId]
 	);
 
 	useEffect(() => {
@@ -101,7 +101,7 @@ export const Camera = ({ chatId }: CameraProps) => {
 								{content}
 							</a>
 						),
-						u: (content) => <span className="underline underline-offset-4">{content}</span>,
+						u: (content) => <span className="underline underline-offset-4">{content}</span>
 					})}
 				</p>
 			)}

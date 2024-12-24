@@ -8,9 +8,7 @@ export default function Page() {
 			<h1 className="text-3xl font-bold">{t("title")}</h1>
 			<p>
 				{t.rich("content.tg-browser", {
-					ub: (content) => (
-						<span className="block underline underline-offset-4 font-semibold">{content}</span>
-					),
+					ub: (content) => <span className="block underline underline-offset-4 font-semibold">{content}</span>
 				})}
 			</p>
 			<p>{t("content.external-browser")}</p>
