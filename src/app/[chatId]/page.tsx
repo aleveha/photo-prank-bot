@@ -1,16 +1,14 @@
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { PhotoCapture } from "~/app/_components/photo-capture";
 import { checkChatAccessibility } from "~/shared/check-chat-accessibility";
-import { PhotoCapture } from "../_components/photo-capture";
 
 interface Props {
-	params: {
-		chatId: string;
-	};
+	params: Promise<{ chatId: string }>;
 }
 
-async function Page({ params }: Props) {
-	const chatId = Number(params.chatId);
+export default async function Page({ params }: Props) {
+	const { chatId: _chatId } = await params;
+	const chatId = Number(_chatId);
 
 	if (Number.isNaN(chatId)) {
 		return notFound();
@@ -23,7 +21,3 @@ async function Page({ params }: Props) {
 
 	return <PhotoCapture chatId={chatId} />;
 }
-
-export default dynamic(() => Promise.resolve(Page), {
-	ssr: false
-});

@@ -6,9 +6,11 @@ import { DEFAULT_LOCALE, type Locale } from "~/configs/i18n";
 const COOKIE_NAME = "NEXT_LOCALE";
 
 export async function getUserLocale() {
-	return cookies().get(COOKIE_NAME)?.value || DEFAULT_LOCALE;
+	const _cookies = await cookies();
+	return _cookies.get(COOKIE_NAME)?.value || DEFAULT_LOCALE;
 }
 
 export async function setUserLocale(locale: Locale) {
-	cookies().set(COOKIE_NAME, locale);
+	const _cookies = await cookies();
+	_cookies.set(COOKIE_NAME, locale);
 }
