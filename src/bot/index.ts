@@ -14,10 +14,7 @@ import {
 	reportCallbackRateLimitExceeded
 } from "./handlers/callbacks/report";
 import { restrictCallbackQuery } from "./handlers/callbacks/restrict";
-import { language as languageCommand } from "./handlers/commands/language";
-import { links as linksCommand } from "./handlers/commands/links";
-import { privacyPolicy } from "./handlers/commands/privacy-policy";
-import { start } from "./handlers/commands/start";
+import { COMMANDS } from "./handlers/commands";
 import { myChatMember } from "./handlers/events/my-chat-member";
 import { newChatMembers } from "./handlers/events/new-chat-members";
 import { answerCallbackQuery } from "./middlewares/answer-callback-query";
@@ -39,20 +36,7 @@ bot.use(autoQuote({ allowSendingWithoutReply: true }));
 bot.on("my_chat_member", myChatMember);
 bot.on("message:new_chat_members", newChatMembers).use(privateChatOnly).use(verification);
 
-bot.command("start").use(limit(DEFAULT_RATE_LIMITER_CONFIG)).use(privateChatOnly).use(verification).use(start);
-
-bot.command("links")
-	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
-	.use(privateChatOnly)
-	.use(verification)
-	.use(hasChannelSubscription)
-	.use(linksCommand);
-
-bot.command("privacy")
-	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
-	.use(privateChatOnly)
-	.use(verification)
-	.use(privacyPolicy);
+bot.use(COMMANDS);
 
 bot.callbackQuery("links")
 	.use(answerCallbackQuery)
@@ -61,12 +45,6 @@ bot.callbackQuery("links")
 	.use(verification)
 	.use(hasChannelSubscription)
 	.use(linksCallback);
-
-bot.command("language")
-	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
-	.use(privateChatOnly)
-	.use(verification)
-	.use(languageCommand);
 
 bot.callbackQuery(new RegExp(`language:(${LOCALES.join("|")})`))
 	.use(answerCallbackQuery)

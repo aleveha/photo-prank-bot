@@ -15,7 +15,7 @@ try {
 }
 
 try {
-	await bot.api.setMyCommands(COMMANDS);
+	await COMMANDS.setCommands(bot);
 	console.info("Commands set successfully");
 } catch (err) {
 	console.error("Failed to set commands:", err);

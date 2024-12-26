@@ -2,7 +2,7 @@ import { type CommandContext, InlineKeyboard } from "grammy";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
 
-export async function start(ctx: CommandContext<Context>) {
+export default async function handler(ctx: CommandContext<Context>) {
 	await ctx.reply(ctx.t("start-command.message"), {
 		reply_markup: new InlineKeyboard()
 			.text(ctx.t("start-command.get-links-button"), "links")
