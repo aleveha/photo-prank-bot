@@ -1,4 +1,4 @@
-import type { CallbackQueryContext } from "grammy";
+import { type CallbackQueryContext, InlineKeyboard } from "grammy";
 import type { Context } from "~/bot/types";
 import type { Locale } from "~/configs/i18n";
 import { getChat, updateChat } from "~/services/chat.service";
@@ -22,5 +22,9 @@ export async function language(ctx: CallbackQueryContext<Context>) {
 	}
 
 	await ctx.i18n.renegotiateLocale();
-	await ctx.editMessageText(ctx.t("language-command.success-message"), { reply_markup: undefined });
+	await ctx.editMessageText(ctx.t("language-command.success-message"), {
+		reply_markup: new InlineKeyboard()
+			.text(ctx.t("language-command.en-button"), "language:en")
+			.text(ctx.t("language-command.ru-button"), "language:ru")
+	});
 }
