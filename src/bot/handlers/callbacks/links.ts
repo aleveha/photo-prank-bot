@@ -7,5 +7,5 @@ export async function links(ctx: CallbackQueryContext<Context>) {
 		return;
 	}
 
-	await ctx.reply(ctx.t("links-command") + "\n\n" + generateLinks(ctx.chat.id));
+	await ctx.reply(ctx.t("links-command.message") + "\n\n" + generateLinks(ctx.chat.id));
 }
