@@ -4,9 +4,14 @@ const withNextIntl = createNextIntlPlugin("./src/app/_configs/i18n.tsx");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	experimental: {
-		serverComponentsExternalPackages: ["grammy", "@grammyjs/auto-retry", "@grammyjs/ratelimiter"]
-	}
+	serverExternalPackages: [
+		"grammy",
+		"@grammyjs/auto-retry",
+		"@grammyjs/ratelimiter",
+		"@grammyjs/commands",
+		"@grammyjs/i18n",
+		"@grammyjs/parse-mode"
+	]
 };
 
 export default withNextIntl(nextConfig);
