@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "bun run typecheck && bun --bun startup && bunx next dev",
-		"tunnel": "ssh -R make-them-smile.lhr.rocks:80:localhost:3000 plan@localhost.run",
+		"tunnel": "ssh -R 80:localhost:3000 localhost.run",
 		"build": "bun run typecheck && bun run db:m && next build && bun run startup",
 		"start": "next start",
 		"format": "biome format --write .",
