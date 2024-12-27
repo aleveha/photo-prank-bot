@@ -1,5 +1,5 @@
 export const Loader = () => (
-	<div role="status">
+	<div>
 		<svg
 			aria-hidden="true"
 			className="w-20 h-20 animate-spin text-white fill-orange-600"

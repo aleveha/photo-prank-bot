@@ -26,8 +26,10 @@
 		}
 	},
 	"prank": {
-		"title": "🎉 You got pranked 🎉",
-		"subtitle": "Use <a><u>{botTag}</u></a> to get your unique link and prank your friends! 📸"
+		"title": "📸 You got pranked!",
+		"subtitle": "<a><u>{botTag}</u></a> sent your photo to the prankster!",
+		"description": "Get a unique link with <a><u>{botTag}</u></a> and prank your friends! 📸",
+		"button": "Go to bot chat"
 	},
 	"privacy-policy": {
 		"title": "Privacy Policy",
