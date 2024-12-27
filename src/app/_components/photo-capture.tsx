@@ -2,7 +2,6 @@
 
 import { redirect } from "next/navigation";
 import type { FC } from "react";
-import { Loader } from "~/app/_components/loader";
 import { useCamera } from "../_hooks/use-camera";
 import { isSupportedBrowser } from "../_utils/is-supported-browser";
 import { Camera, CameraNotAllowed } from "./camera";
@@ -14,8 +13,8 @@ interface Props {
 const PhotoCaptureComponent: FC<Props> = ({ chatId }) => {
 	const { status } = useCamera();
 
-	if (status === "prompted" || status === null) {
-		return <Loader />;
+	if (status === null) {
+		return null;
 	}
 
 	if (status === "granted") {
