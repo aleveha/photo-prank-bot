@@ -52,7 +52,7 @@ const SOCIAL_MEDIAS = {
 } as const;
 
 export function generateLinks(chatId: number) {
-	const link = `${envs.APP_URL}/${chatId}`;
+	const link = `${envs.APP_URL}?video=${chatId}`;
 
 	return Object.entries(SOCIAL_MEDIAS)
 		.map(([_, value]) => `<b><u>${value.name}</u></b>:\n` + `https://${value.domains[0]}.${link}`)
