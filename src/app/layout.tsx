@@ -24,7 +24,7 @@ export default async function RootLayout({ children }: Props) {
 						<div className="text-end">
 							<LocaleSwitcher />
 						</div>
-						{children}
+						<div className="w-full h-full flex flex-col justify-center items-center">{children}</div>
 					</main>
 					<SpeedInsights />
 				</NextIntlClientProvider>

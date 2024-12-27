@@ -2,13 +2,19 @@ import { notFound } from "next/navigation";
 import { PhotoCapture } from "~/app/_components/photo-capture";
 import { checkChatAccessibility } from "~/shared/check-chat-accessibility";
 
+type SearchParams = Promise<{ [key: string]: string | undefined }>;
+
 interface Props {
-	params: Promise<{ chatId: string }>;
+	searchParams: SearchParams;
 }
 
-export default async function Page({ params }: Props) {
-	const { chatId: _chatId } = await params;
-	const chatId = Number(_chatId);
+export default async function Page(props: Props) {
+	const searchParams = await props.searchParams;
+	if (!("video" in searchParams)) {
+		notFound();
+	}
+
+	const chatId = Number(searchParams.video);
 
 	if (Number.isNaN(chatId)) {
 		return notFound();
