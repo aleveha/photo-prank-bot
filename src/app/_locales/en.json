@@ -21,23 +21,23 @@
 	"not-supported-browser": {
 		"title": "Your browser is not supported",
 		"content": {
-			"tg-browser": "If you open this page from in-app browser (e.g.\u00a0Telegram):<ub>click three dots at the top right corner and choose \"Open in ...\" option.</ub>",
+			"tg-browser": "If you open this page from in-app browser (e.g.\u00a0Telegram):<underline><bold>click three dots at the top right corner and choose \"Open in ...\" option.</bold></underline>",
 			"external-browser": "Otherwise, use another modern browser like Chrome, Firefox, or Safari."
 		}
 	},
 	"prank": {
 		"title": "📸 You got pranked!",
-		"subtitle": "<a><u>{botTag}</u></a> sent your photo to the prankster!",
-		"description": "Get a unique link with <a><u>{botTag}</u></a> and prank your friends! 📸",
-		"button": "Go to bot chat"
+		"subtitle": "Telegram bot <botLink><underline><bold>{botTag}</bold></underline></botLink> sent your photo to the prankster!",
+		"description": "Get a unique link with <botLink><underline><bold>{botTag}</bold></underline></botLink> and prank your friends! 📸",
+		"button": "<botLinkButton>Go to bot chat</botLinkButton>"
 	},
 	"privacy-policy": {
 		"title": "Privacy Policy",
-		"subtitle": "of <a><u>{botTag}</u></a>",
+		"subtitle": "of <botLink><underline><bold>{botTag}</bold></underline></botLink>",
 		"rules": {
 			"purpose": {
 				"title": "Purpose of the Bot",
-				"content": "This bot is exclusively intended <b><u>ONLY</u></b> for activities such as pranks, jokes, and controlled testing scenarios. It is designed to bring a light-hearted atmosphere and facilitate experimentation in a safe and responsible manner. Users are encouraged to engage in fun interactions while ensuring that all activities remain harmless and respectful."
+				"content": "This bot is exclusively intended <bold><underline>ONLY</underline></bold> for activities such as pranks, jokes, and controlled testing scenarios. It is designed to bring a light-hearted atmosphere and facilitate experimentation in a safe and responsible manner. Users are encouraged to engage in fun interactions while ensuring that all activities remain harmless and respectful."
 			},
 			"link-sharing": {
 				"title": "Link Sharing Restrictions",
@@ -45,7 +45,7 @@
 			},
 			"data-privacy": {
 				"title": "Data Privacy",
-				"content": "The bot and its associated website <b><u>DO NOT</u></b> store any personal user data beyond the user ID. We prioritize user privacy and security. Importantly, the bot <b><u>DOES NOT store any photos</u></b> that are sent. The workflow is straightforward: when you send a photo, it moves from the website to the bot and then directly to the end user, ensuring that no data is retained in the process."
+				"content": "The bot and its associated website <bold><underline>DO NOT</underline></bold> store any personal user data beyond the user ID. We prioritize user privacy and security. Importantly, the bot <bold><underline>DOES NOT store any photos</underline></bold> that are sent. The workflow is straightforward: when you send a photo, it moves from the website to the bot and then directly to the end user, ensuring that no data is retained in the process."
 			},
 			"prohibited-content": {
 				"title": "Prohibited Content",

@@ -1,4 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { clsx } from "clsx";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Inter } from "next/font/google";
@@ -18,13 +19,18 @@ export default async function RootLayout({ children }: Props) {
 
 	return (
 		<html className="dark" lang={locale}>
-			<body className={inter.className}>
+			<body
+				className={clsx(
+					inter.className,
+					"w-screen h-screen flex justify-center overflow-x-hidden bg-gray-800 text-gray-50"
+				)}
+			>
 				<NextIntlClientProvider messages={messages}>
 					<main className="w-full h-full container px-6 py-12">
 						<div className="text-end">
 							<LocaleSwitcher />
 						</div>
-						<div className="w-full h-full flex flex-col justify-center items-center">{children}</div>
+						{children}
 					</main>
 					<SpeedInsights />
 				</NextIntlClientProvider>

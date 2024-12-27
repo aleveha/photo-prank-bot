@@ -25,5 +25,9 @@ export default async function Page(props: Props) {
 		return notFound();
 	}
 
-	return <PhotoCapture chatId={chatId} />;
+	return (
+		<div className="w-full h-full flex flex-col justify-center items-center">
+			<PhotoCapture chatId={chatId} />
+		</div>
+	);
 }

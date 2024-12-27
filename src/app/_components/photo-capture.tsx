@@ -5,6 +5,7 @@ import type { FC } from "react";
 import { useCamera } from "../_hooks/use-camera";
 import { isSupportedBrowser } from "../_utils/is-supported-browser";
 import { Camera, CameraNotAllowed } from "./camera";
+import { Loader } from "./loader";
 
 interface Props {
 	chatId: number;
@@ -13,15 +14,15 @@ interface Props {
 const PhotoCaptureComponent: FC<Props> = ({ chatId }) => {
 	const { status } = useCamera();
 
-	if (status === null) {
-		return null;
-	}
-
 	if (status === "granted") {
 		return <Camera chatId={chatId} />;
 	}
 
-	return <CameraNotAllowed />;
+	if (status === "denied") {
+		return <CameraNotAllowed />;
+	}
+
+	return <Loader />;
 };
 
 const withSupportedBrowser = (Component: FC<Props>) => {
