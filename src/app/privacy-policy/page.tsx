@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { RichText } from "~/app/_components/ui/rich-text";
 import { envs } from "~/configs/envs";
 
 type Rules = keyof IntlMessages["privacy-policy"]["rules"];
@@ -17,26 +18,19 @@ export default function Page() {
 	return (
 		<div className="space-y-4 pb-8">
 			<h1 className="text-3xl font-bold">{t("title")}</h1>
-			<h2>
-				{t.rich("subtitle", {
-					botTag: `@${envs.NEXT_PUBLIC_BOT_NAME}`,
-					a: (content) => (
-						<a
-							className="hover:text-orange-500"
-							href={`https://t.me/${envs.NEXT_PUBLIC_BOT_NAME}`}
-							target="_blank"
-							rel="noreferrer"
-						>
-							{content}
-						</a>
-					)
-				})}
-			</h2>
+			<RichText>
+				{(messages) =>
+					t.rich("subtitle", {
+						...messages,
+						botTag: `@${envs.NEXT_PUBLIC_BOT_NAME}`
+					})
+				}
+			</RichText>
 			<ol className="space-y-4 [&_h3]:font-bold [&_h3]:inline [&_h3]:text-lg [&_p]:leading-loose">
 				{RULES.map((rule) => (
 					<li key={rule}>
 						<h3>{t(`rules.${rule}.title`)}</h3>
-						<p>{t.rich(`rules.${rule}.content`)}</p>
+						<RichText>{(messages) => t.rich(`rules.${rule}.content`, messages)}</RichText>
 					</li>
 				))}
 			</ol>
