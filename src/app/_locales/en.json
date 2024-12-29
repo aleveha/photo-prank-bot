@@ -18,6 +18,10 @@
 			"ru": "Russian"
 		}
 	},
+	"not-found": {
+		"title": "Page not found",
+		"content": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+	},
 	"not-supported-browser": {
 		"title": "Your browser is not supported",
 		"content": {
