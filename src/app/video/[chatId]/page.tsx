@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { PhotoCapture } from "~/app/_components/photo-capture";
 import { checkChatAccessibility } from "~/shared/check-chat-accessibility";
 import { type Domains, SOCIAL_MEDIA } from "~/shared/constants/social-media";
-import { PhotoCapture } from "./_components/photo-capture";
-
-type SearchParams = Promise<{ [key: string]: string | undefined }>;
 
 interface Props {
-	searchParams: SearchParams;
+	params: Promise<{ chatId: string }>;
 }
 
 function getSocialMediaByDomain(host: string) {
@@ -52,12 +50,8 @@ export async function generateMetadata(): Promise<Metadata | undefined> {
 }
 
 export default async function Page(props: Props) {
-	const searchParams = await props.searchParams;
-	if (!("video" in searchParams)) {
-		notFound();
-	}
-
-	const chatId = Number(searchParams.video);
+	const params = await props.params;
+	const chatId = Number(params.chatId);
 
 	if (Number.isNaN(chatId)) {
 		return notFound();
