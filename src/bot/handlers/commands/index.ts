@@ -2,10 +2,7 @@ import { Command, CommandGroup } from "@grammyjs/commands";
 import { limit } from "@grammyjs/ratelimiter";
 import type { CommandContext, MiddlewareFn } from "grammy";
 import { i18n } from "~/bot/configs/i18n";
-import { hasChannelSubscription } from "~/bot/middlewares/has-channel-subscription";
-import { privateChatOnly } from "~/bot/middlewares/private-chat-only";
-import { DEFAULT_RATE_LIMITER_CONFIG } from "~/bot/middlewares/rate-limiter";
-import { verification } from "~/bot/middlewares/verification";
+import { DEFAULT_RATE_LIMITER_CONFIG, mandatorySubscriptions, privateChatOnly, verification } from "~/bot/middlewares";
 import type { Context } from "~/bot/types";
 import type { Locale } from "~/configs/i18n";
 
@@ -27,7 +24,7 @@ async function commandsFactory() {
 			handler
 		];
 		if (commandsRequireSubscription.includes(commandName)) {
-			middlewares.splice(-1, 0, hasChannelSubscription);
+			middlewares.splice(-1, 0, mandatorySubscriptions);
 		}
 
 		const command = new Command<Context>(
