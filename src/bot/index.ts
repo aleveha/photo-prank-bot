@@ -17,12 +17,14 @@ import { restrictCallbackQuery } from "./handlers/callbacks/restrict";
 import { COMMANDS } from "./handlers/commands";
 import { myChatMember } from "./handlers/events/my-chat-member";
 import { newChatMembers } from "./handlers/events/new-chat-members";
-import { answerCallbackQuery } from "./middlewares/answer-callback-query";
-import { hasChannelSubscription } from "./middlewares/has-channel-subscription";
-import { privateChatOnly } from "./middlewares/private-chat-only";
-import { DEFAULT_RATE_LIMITER_CONFIG } from "./middlewares/rate-limiter";
-import { reportChatOnly } from "./middlewares/report-chat-only";
-import { verification } from "./middlewares/verification";
+import {
+	DEFAULT_RATE_LIMITER_CONFIG,
+	answerCallbackQuery,
+	mandatorySubscriptions,
+	privateChatOnly,
+	reportChatOnly,
+	verification
+} from "./middlewares";
 import type { Context } from "./types";
 
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
@@ -43,7 +45,7 @@ bot.callbackQuery("links")
 	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
 	.use(privateChatOnly)
 	.use(verification)
-	.use(hasChannelSubscription)
+	.use(mandatorySubscriptions)
 	.use(linksCallback);
 
 bot.callbackQuery(new RegExp(`language:(${LOCALES.join("|")})`))

@@ -1,5 +1,5 @@
 import type { CallbackQueryContext, NextFunction } from "grammy";
-import { DEFAULT_RATE_LIMITER_CONFIG } from "~/bot/middlewares/rate-limiter";
+import { DEFAULT_RATE_LIMITER_CONFIG } from "~/bot/middlewares";
 import type { Context } from "~/bot/types";
 import { REPORT_VALUES } from "./constants";
 
