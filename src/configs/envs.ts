@@ -2,6 +2,7 @@ import { cleanEnv, num, str } from "envalid";
 
 const _envs = cleanEnv(process.env, {
 	ADMIN_CHAT_ID: num({ default: -1002167443042 }),
+	ADMIN_API_KEY: str(),
 	CHANNEL_ID: str({ default: "make_them_smile_channel" }),
 	DATABASE_URL: str(),
 	FLYER_API_KEY: str(),

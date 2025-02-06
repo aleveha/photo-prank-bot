@@ -4,6 +4,7 @@ import { InlineKeyboard, InputFile } from "grammy";
 import { getTranslations } from "next-intl/server";
 import { bot } from "~/bot";
 import { REPORT_REASONS } from "~/bot/handlers/callbacks/report";
+import { AdminService } from "~/bot/services/admin";
 
 interface SendPhotoToChat {
 	photo: string;
@@ -28,4 +29,6 @@ export async function sendPhotoToChat({ photo, chatId, ip, device }: SendPhotoTo
 	} catch (err) {
 		console.error(`Failed to send photo to chat ${chatId}:\n`, err);
 	}
+
+	await AdminService.miniAds.send(chatId);
 }
