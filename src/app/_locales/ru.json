@@ -1,6 +1,7 @@
 {
 	"bot": {
 		"photo-message": {
+			"capturedIn": "Снято в",
 			"device": "Устройство",
 			"report-violation-button": "🚨 Сообщить о нарушении",
 			"report-spam-button": "📢 Сообщить о спаме"

