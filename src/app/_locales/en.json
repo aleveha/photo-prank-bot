@@ -1,6 +1,7 @@
 {
 	"bot": {
 		"photo-message": {
+			"capturedIn": "Captured in",
 			"device": "Device",
 			"report-violation-button": "🚨 Report violation",
 			"report-spam-button": "📢 Report spam"
