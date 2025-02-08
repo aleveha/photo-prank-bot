@@ -1,8 +1,10 @@
 import { type CommandContext, InlineKeyboard } from "grammy";
+import { AdminService } from "~/bot/services/admin";
 import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
 
 export default async function handler(ctx: CommandContext<Context>) {
+	await AdminService.miniAds.send(ctx.chat.id, "greeting");
 	await ctx.reply(ctx.t("start-command.message"), {
 		reply_markup: new InlineKeyboard()
 			.text(ctx.t("start-command.get-links-button"), "links")
