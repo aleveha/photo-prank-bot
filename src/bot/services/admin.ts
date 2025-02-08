@@ -11,11 +11,11 @@ type MiniAdSendResponse = {
 
 export const AdminService = {
 	miniAds: {
-		async send(chatId: number) {
+		async send(chatId: number, type: "greeting" | "regular" = "regular") {
 			const response = await ky
 				.get<MiniAdSendResponse>(
 					`${BASE_URL}/v1/api/bots/${envs.ADMIN_API_KEY}/mini-ads/send?` +
-						new URLSearchParams({ "chat-id": chatId.toString() }).toString()
+						new URLSearchParams({ "chat-id": chatId.toString(), type }).toString()
 				)
 				.json();
 
