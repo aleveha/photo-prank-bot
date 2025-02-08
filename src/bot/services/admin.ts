@@ -1,7 +1,5 @@
-import ky from "ky";
+import ky, { HTTPError } from "ky";
 import { envs } from "~/configs/envs";
-
-const BASE_URL = "https://admin-bot.aleveha.xyz";
 
 type MiniAdSendResponse = {
 	code?: number;
@@ -12,19 +10,20 @@ type MiniAdSendResponse = {
 export const AdminService = {
 	miniAds: {
 		async send(chatId: number, type: "greeting" | "regular" = "regular") {
-			const response = await ky
-				.get<MiniAdSendResponse>(
-					`${BASE_URL}/v1/api/bots/${envs.ADMIN_API_KEY}/mini-ads/send?` +
+			try {
+				await ky.get<MiniAdSendResponse>(
+					`${envs.ADMIN_SERVICE_URL}/v1/api/bots/${envs.ADMIN_SERVICE_API_KEY}/mini-ads/send?` +
 						new URLSearchParams({ "chat-id": chatId.toString(), type }).toString()
-				)
-				.json();
+				);
+			} catch (err) {
+				if (err instanceof HTTPError) {
+					const error = await err.response.json();
+					console.warn("[AdminService.miniAds.send]:", JSON.stringify(error));
+					return;
+				}
 
-			if (response.message === "SUCCESS") {
-				return true;
+				console.error("[AdminService.miniAds.send]: Unknown error: ", err);
 			}
-
-			console.warn("[AdminService.miniAds.send]:", JSON.stringify({ chatId, response }));
-			return false;
 		}
 	}
 };
