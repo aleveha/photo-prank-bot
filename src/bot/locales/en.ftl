@@ -11,6 +11,9 @@ start-command =
         We strictly follow Telegrams guidelines to ensure a safe and compliant environment.
         </blockquote>
 
+        Bot also works in group chats! 🔥
+
+    .add-to-group-chat-button = 💬 Add to group chat
     .get-links-button = 📸 Get your unique links!
     .privacy-policy-button = 🔒 Privacy policy
     .channel-button = 🔉 Channel
