@@ -3,10 +3,12 @@ import type { Context } from "~/bot/types";
 import { envs } from "~/configs/envs";
 import { REPORT_REASONS, REPORT_VALUES, type ReportReason, type ReportValue } from "./constants";
 
+const DELIMITER = "\n\n— — — — — — — — — — — — —\n\n";
+
 export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 	const callbackData = typeof ctx.match === "string" ? ctx.match : ctx.match[0];
 	const params = callbackData.split(":");
-	const originalMessageParts = ctx.msg?.caption?.split("\n\n");
+	const originalMessageParts = ctx.msg?.caption?.split(DELIMITER);
 	const originalMessage = originalMessageParts?.[originalMessageParts.length - 1];
 
 	if (params.length === 1) {
@@ -20,7 +22,7 @@ export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 
 	if (params.length === 2) {
 		await ctx.editMessageCaption({
-			caption: ctx.t("report-command.warning-message") + "\n\n" + ctx.msg?.caption,
+			caption: ctx.t("report-command.warning-message") + DELIMITER + ctx.msg?.caption,
 			reply_markup: new InlineKeyboard()
 				.text(ctx.t("report-command.report-button"), `${callbackData}:${REPORT_VALUES.do}`)
 				.row()
@@ -45,13 +47,14 @@ export async function reportCallback(ctx: CallbackQueryContext<Context>) {
 		return;
 	}
 
+	const chatId = (ctx.chat ?? ctx.from).id;
 	const reportMessage =
 		`Report from ${ctx.from.username ? `@${ctx.from.username}` : ctx.from.first_name}\n` +
-		`ID: ${ctx.from.id}\n` +
+		`Chat ID: ${chatId}\n` +
 		`Reason: <b>${reason}</b>\n\n` +
 		`Original message:\n${originalMessage}`;
 
-	const reportKeyboard = new InlineKeyboard().text("Warn", `warn:${ctx.from.id}`).text("Ban", `ban:${ctx.from.id}`);
+	const reportKeyboard = new InlineKeyboard().text("Warn", `warn:${chatId}`).text("Ban", `ban:${chatId}`);
 
 	const { message_id: reportId } = await ctx.copyMessage(envs.REPORT_CHAT_ID, {
 		caption: reportMessage,

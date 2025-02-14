@@ -51,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata | undefined> {
 
 export default async function Page(props: Props) {
 	const params = await props.params;
-	const chatId = Number(params.chatId);
+	const chatId = params.chatId.startsWith("100") ? Number("-" + params.chatId) : Number(params.chatId);
 
 	if (Number.isNaN(chatId)) {
 		return notFound();

@@ -21,7 +21,6 @@ import {
 	DEFAULT_RATE_LIMITER_CONFIG,
 	answerCallbackQuery,
 	mandatorySubscriptions,
-	privateChatOnly,
 	reportChatOnly,
 	verification
 } from "./middlewares";
@@ -36,14 +35,13 @@ bot.use(i18n);
 bot.use(autoQuote({ allowSendingWithoutReply: true }));
 
 bot.on("my_chat_member", myChatMember);
-bot.on("message:new_chat_members", newChatMembers).use(privateChatOnly).use(verification);
+bot.on("message:new_chat_members", newChatMembers).use(verification);
 
 bot.use(COMMANDS);
 
 bot.callbackQuery("links")
 	.use(answerCallbackQuery)
 	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
-	.use(privateChatOnly)
 	.use(verification)
 	.use(mandatorySubscriptions)
 	.use(linksCallback);
@@ -51,13 +49,11 @@ bot.callbackQuery("links")
 bot.callbackQuery(new RegExp(`language:(${LOCALES.join("|")})`))
 	.use(answerCallbackQuery)
 	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
-	.use(privateChatOnly)
 	.use(verification)
 	.use(languageCallback);
 
 bot.callbackQuery(REPORT_CALLBACK_QUERY_TRIGGER)
 	.use(answerCallbackQuery)
-	.use(privateChatOnly)
 	.use(
 		limit({
 			onLimitExceeded: reportCallbackRateLimitExceeded,
@@ -68,7 +64,7 @@ bot.callbackQuery(REPORT_CALLBACK_QUERY_TRIGGER)
 	.use(verification)
 	.use(reportCallback);
 
-bot.callbackQuery([/warn:\d+/, /ban:\d+/g])
+bot.callbackQuery([/warn:-?\d+/, /ban:-?\d+/])
 	.use(answerCallbackQuery)
 	.use(reportChatOnly)
 	.use(restrictCallbackQuery);
