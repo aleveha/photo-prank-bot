@@ -29,12 +29,10 @@ export async function restrictCallbackQuery(ctx: CallbackQueryContext<Context>) 
 		return;
 	}
 
-	const { user } = await ctx.api.getChatMember(chatId, chatId);
-
 	await ctx.api.sendMessage(
 		chat.id,
 		i18n.t(
-			user.language_code ?? DEFAULT_LOCALE,
+			chat.language ?? DEFAULT_LOCALE,
 			action === "warn" ? "restrict-command.warning-message" : "restrict-command.ban-message"
 		),
 		{ reply_parameters: undefined }

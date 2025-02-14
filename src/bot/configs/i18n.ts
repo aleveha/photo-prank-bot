@@ -12,11 +12,11 @@ export const i18n = new I18n<Context>({
 	defaultLocale: DEFAULT_LOCALE,
 	directory: path.join(process.cwd(), "/src/bot/locales"),
 	localeNegotiator: async (ctx) => {
-		if (!ctx.from) {
+		if (!ctx.chat || !ctx.from) {
 			return DEFAULT_LOCALE;
 		}
 
-		const chat = await getChat(ctx.from.id);
+		const chat = await getChat(ctx.chat.id);
 		if (chat?.language) {
 			return chat.language;
 		}
@@ -27,7 +27,7 @@ export const i18n = new I18n<Context>({
 				return DEFAULT_LOCALE;
 			}
 
-			await updateChat(ctx.from.id, { language: ctx.from.language_code });
+			await updateChat(ctx.chat.id, { language: ctx.from.language_code });
 
 			return ctx.from.language_code;
 		}
