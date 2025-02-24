@@ -1,7 +1,7 @@
 -accept-policy-message = <i>Используя этого бота, вы соглашаетесь с нашей политикой конфиденциальности!</i>
 
 start-command =
-	.description = Начало работы
+    .description = Начало работы
     .message =
         { -accept-policy-message }
         /privacy
@@ -21,8 +21,8 @@ start-command =
     .chat-button = 💭 Наш чат
 
 links-command =
-	.description = Получите уникальные ссылки! 📸
-	.message = Отправь одну из приведенных ниже ссылок своей жертве, чтобы сделать секретное фото 📸
+    .description = Получите уникальные ссылки! 📸
+    .message = Отправь одну из приведенных ниже ссылок своей жертве, чтобы сделать секретное фото 📸
 
 disable-group-chats-event =
     .message = К сожалению, я работаю только в личных сообщениях 🙁
@@ -114,7 +114,7 @@ restrict-command =
         ❌ <b>User has been banned!</b>
 
 language-command =
-	.description = Изменить язык 🌐
+    .description = Изменить язык 🌐
     .choose-option-message = 🌐 Выберите язык:
     .en-button = 🇬🇧 Aнглийский
     .ru-button = 🇷🇺 Русский
