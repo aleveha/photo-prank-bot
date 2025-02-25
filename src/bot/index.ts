@@ -5,6 +5,7 @@ import { autoQuote } from "@roziscoding/grammy-autoquote";
 import { Bot } from "grammy";
 import { envs } from "~/configs/envs";
 import { LOCALES } from "~/configs/i18n";
+import { PromoService } from "~/services/promo.service";
 import { i18n } from "./configs/i18n";
 import { language as languageCallback } from "./handlers/callbacks/language";
 import { links as linksCallback } from "./handlers/callbacks/links";
@@ -38,6 +39,21 @@ bot.on("my_chat_member", myChatMember);
 bot.on("message:new_chat_members", newChatMembers).use(verification);
 
 bot.use(COMMANDS);
+
+// TODO: replace when admin service is ready
+bot.command("refs", async (ctx) => {
+	const referral = ctx.msg.text.split(" ").at(1);
+	if (!referral) {
+		return;
+	}
+
+	const count = await PromoService.getCountByReferral(referral);
+	if (!count) {
+		return;
+	}
+
+	await ctx.reply(`All: ${count.all}\nPrivate: ${count.private}\nGroup: ${count.group}`);
+});
 
 bot.callbackQuery("links")
 	.use(answerCallbackQuery)
