@@ -1,5 +1,6 @@
-import { eq, sql } from "drizzle-orm";
+import { and, eq, not, sql } from "drizzle-orm";
 import { type InsertChat, database, schema } from "~/configs/database";
+import { envs } from "~/configs/envs";
 
 const deleteChatQuery = database
 	.delete(schema.chat)
@@ -14,7 +15,11 @@ export async function deleteChat(id: number) {
 	}
 }
 
-const getAllChatsQuery = database.select().from(schema.chat).prepare("getAllChatsQuery");
+const getAllChatsQuery = database
+	.select()
+	.from(schema.chat)
+	.where(and(not(eq(schema.chat.id, envs.ADMIN_CHAT_ID)), not(eq(schema.chat.id, envs.REPORT_CHAT_ID))))
+	.prepare("getAllChatsQuery");
 
 export async function getAllChats() {
 	try {
