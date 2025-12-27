@@ -5,7 +5,6 @@ import { envs } from "~/configs/envs";
 import { PromoService } from "~/services/promo.service";
 
 export default async function handler(ctx: CommandContext<Context>) {
-	console.log("start command", ctx);
 	const referral = ctx.msg.text.split(" ").at(1);
 	if (referral) {
 		await PromoService.add(referral, ctx.chat.id);
