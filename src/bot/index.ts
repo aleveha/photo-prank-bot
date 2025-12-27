@@ -1,4 +1,3 @@
-import { autoRetry } from "@grammyjs/auto-retry";
 import { parseMode } from "@grammyjs/parse-mode";
 import { limit } from "@grammyjs/ratelimiter";
 import { autoQuote } from "@roziscoding/grammy-autoquote";
@@ -29,7 +28,7 @@ import type { Context } from "./types";
 
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
-bot.api.config.use(autoRetry({ maxDelaySeconds: 60, maxRetryAttempts: 1 }));
+// bot.api.config.use(autoRetry({ maxDelaySeconds: 60, maxRetryAttempts: 1 }));
 bot.api.config.use(parseMode("HTML"));
 
 bot.use(i18n);
