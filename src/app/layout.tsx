@@ -1,4 +1,3 @@
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { clsx } from "clsx";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -32,7 +31,6 @@ export default async function RootLayout({ children }: Props) {
 						</div>
 						{children}
 					</main>
-					<SpeedInsights />
 				</NextIntlClientProvider>
 			</body>
 		</html>

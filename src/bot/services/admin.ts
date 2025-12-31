@@ -17,8 +17,12 @@ export const AdminService = {
 				);
 			} catch (err) {
 				if (err instanceof HTTPError) {
-					const error = await err.response.json();
-					console.warn("[AdminService.miniAds.send]:", JSON.stringify(error));
+					try {
+						const error = await err.response.json();
+						console.warn("[AdminService.miniAds.send]:", JSON.stringify(error));
+					} catch (err) {
+						console.error("[AdminService.miniAds.send]: KY response parsing error: ", err);
+					}
 					return;
 				}
 

@@ -4,6 +4,7 @@ const withNextIntl = createNextIntlPlugin("./src/app/_configs/i18n.tsx");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	output: "standalone",
 	serverExternalPackages: [
 		"grammy",
 		"@grammyjs/auto-retry",

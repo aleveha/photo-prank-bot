@@ -1,9 +1,5 @@
 import { getAllChats } from "~/services/chat.service";
 
-export const dynamic = "force-dynamic";
-export const fetchCache = "force-no-store";
-export const preferredRegion = ["fra1", "cdg1", "lhr1"];
-
 export async function GET() {
 	const allChats = await getAllChats();
 	if (!allChats) {
