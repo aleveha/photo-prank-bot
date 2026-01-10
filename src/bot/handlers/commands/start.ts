@@ -23,7 +23,7 @@ export default async function handler(ctx: CommandContext<Context>) {
 			.row()
 			.url(ctx.t("start-command.privacy-policy-button"), `${envs.APP_URL}/privacy-policy`)
 			.row()
-			.url(ctx.t("start-command.channel-button"), `https://t.me/${envs.CHANNEL_ID}`)
-			.url(ctx.t("start-command.chat-button"), "https://t.me/make_them_smile_chat")
+			.url(ctx.t("start-command.channel-button"), `https://t.me/${envs.CHANNEL_NAME}`)
+			.url(ctx.t("start-command.chat-button"), `https://t.me/${envs.CHAT_NAME}`)
 	});
 }
