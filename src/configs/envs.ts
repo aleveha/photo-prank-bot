@@ -10,7 +10,7 @@ const _envs = cleanEnv(process.env, {
 	DATABASE_URL: str(),
 	NEXT_PUBLIC_BOT_NAME: str({ default: "make_them_smile_bot" }),
 	REPORT_CHAT_ID: num({ default: -1002335737370 }),
-	SUBGRAM_API_KEY: str({ devDefault: "" }),
+	SUBGRAM_API_KEY: str(),
 	TELEGRAM_TOKEN: str()
 });
 

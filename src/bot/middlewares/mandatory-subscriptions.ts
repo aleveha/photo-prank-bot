@@ -1,6 +1,5 @@
 import type { NextFunction } from "grammy";
 import type { Context } from "~/bot/types";
-import { envs } from "~/configs/envs";
 import { subgram } from "../services/subgram";
 
 export async function mandatorySubscriptions(ctx: Context, next: NextFunction) {
@@ -8,21 +7,12 @@ export async function mandatorySubscriptions(ctx: Context, next: NextFunction) {
 		return;
 	}
 
-	if (envs.isDevelopment) {
-		console.info("[mandatorySubscriptions]: skipping Subgram in development");
-		await next();
-		return;
-	}
-
-	if (ctx.chat.type !== "private" || !ctx.from) {
-		await next();
-		return;
-	}
-
 	try {
+		// Subgram attaches the sponsor list to user_id. Sending the chat id
+		// checks a private user, or the whole group, rather than whoever tapped.
 		const subscribed = await subgram.isSubscribed({
 			chatId: ctx.chat.id,
-			userId: ctx.from.id
+			userId: ctx.chat.id
 		});
 		if (!subscribed) {
 			return;
