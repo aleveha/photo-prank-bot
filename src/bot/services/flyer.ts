@@ -1,7 +1,7 @@
 import ky from "ky";
 import { envs } from "~/configs/envs";
 
-const FLYER_API_BASE_URL = "https://api.flyerservice.io";
+const FLYER_API_BASE_URL = "https://api.flyerhubs.com";
 
 type CheckParams = {
 	languageCode?: string;
@@ -10,7 +10,7 @@ type CheckParams = {
 type CheckResponse = {
 	error: string;
 	info: string;
-	skip: true;
+	skip: boolean;
 	warning: string;
 };
 

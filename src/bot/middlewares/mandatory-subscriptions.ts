@@ -7,9 +7,13 @@ export async function mandatorySubscriptions(ctx: Context, next: NextFunction) {
 		return;
 	}
 
-	const checkResponse = await flyer.check({ userId: ctx.chat.id });
-	if (!checkResponse.skip) {
-		return;
+	try {
+		const checkResponse = await flyer.check({ userId: ctx.chat.id });
+		if (!checkResponse.skip) {
+			return;
+		}
+	} catch (err) {
+		console.error("[mandatorySubscriptions]: flyer check failed, continuing:", err);
 	}
 
 	await next();
