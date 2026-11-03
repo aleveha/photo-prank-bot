@@ -8,8 +8,6 @@ export async function mandatorySubscriptions(ctx: Context, next: NextFunction) {
 	}
 
 	try {
-		// Subgram attaches the sponsor list to user_id. Sending the chat id
-		// checks a private user, or the whole group, rather than whoever tapped.
 		const subscribed = await subgram.isSubscribed({
 			chatId: ctx.chat.id,
 			userId: ctx.chat.id
