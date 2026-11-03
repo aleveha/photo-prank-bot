@@ -14,7 +14,7 @@ services:
       CHANNEL_NAME: ${CHANNEL_NAME}
       CHAT_NAME: ${CHAT_NAME}
       DATABASE_URL: ${DATABASE_URL}
-      FLYER_API_KEY: ${FLYER_API_KEY}
+      SUBGRAM_API_KEY: ${SUBGRAM_API_KEY}
       TELEGRAM_TOKEN: ${TELEGRAM_TOKEN}
     depends_on:
       - postgres

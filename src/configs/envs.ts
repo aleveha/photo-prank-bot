@@ -8,9 +8,9 @@ const _envs = cleanEnv(process.env, {
 	CHANNEL_NAME: str(),
 	CHAT_NAME: str(),
 	DATABASE_URL: str(),
-	FLYER_API_KEY: str(),
 	NEXT_PUBLIC_BOT_NAME: str({ default: "make_them_smile_bot" }),
 	REPORT_CHAT_ID: num({ default: -1002335737370 }),
+	SUBGRAM_API_KEY: str({ devDefault: "" }),
 	TELEGRAM_TOKEN: str()
 });
 
