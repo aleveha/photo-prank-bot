@@ -61,6 +61,12 @@ bot.callbackQuery("links")
 	.use(mandatorySubscriptions)
 	.use(linksCallback);
 
+bot.callbackQuery("subgram-op")
+	.use(answerCallbackQuery)
+	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
+	.use(verification)
+	.use(mandatorySubscriptions);
+
 bot.callbackQuery(new RegExp(`language:(${LOCALES.join("|")})`))
 	.use(answerCallbackQuery)
 	.use(limit(DEFAULT_RATE_LIMITER_CONFIG))
