@@ -24,17 +24,12 @@ import {
 	verification
 } from "./middlewares";
 import type { Context } from "./types";
+import { defaultHtmlParseMode } from "./utils/default-parse-mode";
 
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
 // bot.api.config.use(autoRetry({ maxDelaySeconds: 60, maxRetryAttempts: 1 }));
-// Default HTML parse mode (replaces @grammyjs/parse-mode parseMode(), removed in v2)
-bot.api.config.use((prev, method, payload, signal) => {
-	if (payload && typeof payload === "object" && !("parse_mode" in payload)) {
-		Object.assign(payload, { parse_mode: "HTML" });
-	}
-	return prev(method, payload, signal);
-});
+bot.api.config.use(defaultHtmlParseMode);
 
 bot.use(i18n);
 bot.use(autoQuote({ allowSendingWithoutReply: true }));
