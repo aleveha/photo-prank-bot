@@ -10,8 +10,7 @@ const nextConfig = {
 		"@grammyjs/auto-retry",
 		"@grammyjs/ratelimiter",
 		"@grammyjs/commands",
-		"@grammyjs/i18n",
-		"@grammyjs/parse-mode"
+		"@grammyjs/i18n"
 	]
 };
 

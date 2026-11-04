@@ -1,4 +1,3 @@
-import { parseMode } from "@grammyjs/parse-mode";
 import { limit } from "@grammyjs/ratelimiter";
 import { autoQuote } from "@roziscoding/grammy-autoquote";
 import { Bot } from "grammy";
@@ -29,7 +28,13 @@ import type { Context } from "./types";
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
 // bot.api.config.use(autoRetry({ maxDelaySeconds: 60, maxRetryAttempts: 1 }));
-bot.api.config.use(parseMode("HTML"));
+// Default HTML parse mode (replaces @grammyjs/parse-mode parseMode(), removed in v2)
+bot.api.config.use((prev, method, payload, signal) => {
+	if (payload && typeof payload === "object" && !("parse_mode" in payload)) {
+		Object.assign(payload, { parse_mode: "HTML" });
+	}
+	return prev(method, payload, signal);
+});
 
 bot.use(i18n);
 bot.use(autoQuote({ allowSendingWithoutReply: true }));
