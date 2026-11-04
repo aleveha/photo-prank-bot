@@ -18,14 +18,7 @@ export const AdminService = {
 			} catch (err) {
 				if (err instanceof HTTPError) {
 					const { status } = err.response;
-					const body = await err.response.text().catch(() => "<unreadable body>");
-
-					try {
-						const error = JSON.parse(body) as unknown;
-						console.warn(`[AdminService.miniAds.send]: HTTP ${status}:`, JSON.stringify(error));
-					} catch {
-						console.error(`[AdminService.miniAds.send]: HTTP ${status}, non-JSON body:`, body);
-					}
+					console.warn(`[AdminService.miniAds.send]: HTTP ${status}:`, JSON.stringify(err.data));
 					return;
 				}
 
