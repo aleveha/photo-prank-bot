@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import type { ReactNode } from "react";
 import { LocaleSwitcher } from "~/app/_components/locale-switcher";
@@ -14,7 +14,6 @@ interface Props {
 
 export default async function RootLayout({ children }: Props) {
 	const locale = await getLocale();
-	const messages = await getMessages();
 
 	return (
 		<html className="dark" lang={locale}>
@@ -24,7 +23,7 @@ export default async function RootLayout({ children }: Props) {
 					"w-screen h-screen flex justify-center overflow-x-hidden bg-gray-800 text-gray-50"
 				)}
 			>
-				<NextIntlClientProvider messages={messages}>
+				<NextIntlClientProvider>
 					<main className="w-full h-full container px-6 py-12">
 						<div className="text-end">
 							<LocaleSwitcher />

@@ -1,7 +1,7 @@
 import type en from "../app/_locales/en.json";
 
-type Messages = typeof en;
-
-declare global {
-	interface IntlMessages extends Messages {}
+declare module "next-intl" {
+	interface AppConfig {
+		Messages: typeof en;
+	}
 }
