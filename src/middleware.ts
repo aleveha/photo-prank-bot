@@ -18,5 +18,7 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
+	// Edge middleware makes Next compile instrumentation for Edge too, which breaks on grammy's Node-only deps.
+	runtime: "nodejs",
 	matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)"]
 };
