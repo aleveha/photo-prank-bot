@@ -23,21 +23,9 @@ async function setCommands() {
 	}
 }
 
-async function notifyAdmin() {
-	try {
-		await bot.api.sendMessage(envs.ADMIN_CHAT_ID, "Запущена новая версия");
-	} catch (err) {
-		console.error("Failed to send message:", err);
-	}
-}
-
 export async function register() {
 	console.log("Loaded environment variables:", envs);
 
 	await setCommands();
 	await setWehbook();
-
-	if (envs.isProduction) {
-		await notifyAdmin();
-	}
 }
