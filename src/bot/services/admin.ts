@@ -24,8 +24,6 @@ export const AdminService = {
 						const error = JSON.parse(body) as unknown;
 						console.warn(`[AdminService.miniAds.send]: HTTP ${status}:`, JSON.stringify(error));
 					} catch {
-						// Admin service sometimes returns a non-JSON body (e.g. "[object Object]"
-						// when an object is sent without JSON.stringify). Log status + raw text instead.
 						console.error(`[AdminService.miniAds.send]: HTTP ${status}, non-JSON body:`, body);
 					}
 					return;
