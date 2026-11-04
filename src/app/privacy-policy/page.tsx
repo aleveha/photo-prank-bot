@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 import { RichText } from "~/app/_components/ui/rich-text";
+import type en from "~/app/_locales/en.json";
 import { envs } from "~/configs/envs";
 
-type Rules = keyof IntlMessages["privacy-policy"]["rules"];
+type Rules = keyof (typeof en)["privacy-policy"]["rules"];
 const RULES = [
 	"purpose",
 	"link-sharing",
@@ -10,7 +11,7 @@ const RULES = [
 	"prohibited-content",
 	"false-complaints",
 	"respectful-use"
-] as Rules[];
+] as const satisfies Rules[];
 
 export default function Page() {
 	const t = useTranslations("privacy-policy");
