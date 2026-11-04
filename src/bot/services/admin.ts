@@ -17,11 +17,16 @@ export const AdminService = {
 				);
 			} catch (err) {
 				if (err instanceof HTTPError) {
+					const { status } = err.response;
+					const body = await err.response.text().catch(() => "<unreadable body>");
+
 					try {
-						const error = await err.response.json();
-						console.warn("[AdminService.miniAds.send]:", JSON.stringify(error));
-					} catch (err) {
-						console.error("[AdminService.miniAds.send]: KY response parsing error: ", err);
+						const error = JSON.parse(body) as unknown;
+						console.warn(`[AdminService.miniAds.send]: HTTP ${status}:`, JSON.stringify(error));
+					} catch {
+						// Admin service sometimes returns a non-JSON body (e.g. "[object Object]"
+						// when an object is sent without JSON.stringify). Log status + raw text instead.
+						console.error(`[AdminService.miniAds.send]: HTTP ${status}, non-JSON body:`, body);
 					}
 					return;
 				}
