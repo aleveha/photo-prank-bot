@@ -5,8 +5,7 @@ import { schema } from "./schema";
 
 export type { InsertChat } from "./schema";
 
-// infer: true keeps v3 JS parameter typing (Dates, bools, bigints, arrays)
-const queryClient = postgres(envs.DATABASE_URL, { max: 10, infer: true });
+const queryClient = postgres(envs.DATABASE_URL, { max: 10 });
 
 const database = drizzle(queryClient, { schema });
 
