@@ -25,7 +25,7 @@ export const LocaleSwitcher: FC = () => {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="outline-none">
+			<DropdownMenuTrigger className="outline-hidden">
 				<LanguagesIcon className="size-5" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
