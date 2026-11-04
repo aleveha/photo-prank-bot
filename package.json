@@ -25,7 +25,7 @@
 		"canvas-confetti": "^1.9.4",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"drizzle-orm": "^0.38.4",
+		"drizzle-orm": "^0.45.4",
 		"envalid": "^9.0.0",
 		"grammy": "1.46.0",
 		"ky": "^2.2.0",
@@ -46,7 +46,7 @@
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
 		"autoprefixer": "^10.6.2",
-		"drizzle-kit": "^0.30.6",
+		"drizzle-kit": "^0.31.11",
 		"postcss": "^8.5.32",
 		"tailwindcss": "^3.4.19",
 		"typescript": "^5.9.3"
