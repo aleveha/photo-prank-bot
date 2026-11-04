@@ -7,14 +7,16 @@ COPY package.json bun.lock ./
 RUN bun install
 
 # Rebuild the source code only when needed
-FROM base AS builder
+# Use Node for `next build` — `bun --node` hits a Bun CJS loader bug during
+# "Collecting page data" (Expected CommonJS module to have a function wrapper).
+FROM node:24-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
 
-RUN bun --node run build
+RUN node --run build
 
 # Production image - run with Node.js
 FROM node:24-alpine AS runner
