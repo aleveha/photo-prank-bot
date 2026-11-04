@@ -24,12 +24,12 @@ import {
 	verification
 } from "./middlewares";
 import type { Context } from "./types";
-import { defaultHtmlParseMode } from "./utils/default-parse-mode";
+import { parseModeTransformer } from "./utils/parse-mode-transformer";
 
 export const bot = new Bot<Context>(envs.TELEGRAM_TOKEN);
 
 // bot.api.config.use(autoRetry({ maxDelaySeconds: 60, maxRetryAttempts: 1 }));
-bot.api.config.use(defaultHtmlParseMode);
+bot.api.config.use(parseModeTransformer);
 
 bot.use(i18n);
 bot.use(autoQuote({ allowSendingWithoutReply: true }));
