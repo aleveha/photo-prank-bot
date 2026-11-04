@@ -1,6 +1,7 @@
 import { bot } from "~/bot";
 import { COMMANDS } from "~/bot/handlers/commands";
 import { envs } from "~/configs/envs";
+import { muteInvalidServerActionLogs } from "~/shared/mute-invalid-server-action-logs";
 
 async function setWehbook() {
 	try {
@@ -24,6 +25,8 @@ async function setCommands() {
 }
 
 export async function register() {
+	muteInvalidServerActionLogs();
+
 	console.log("Loaded environment variables:", envs);
 
 	await setCommands();
