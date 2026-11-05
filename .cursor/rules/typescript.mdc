@@ -1,0 +1,16 @@
+---
+description: TypeScript conventions for this repo
+globs: "**/*.{ts,tsx}"
+alwaysApply: false
+---
+
+# TypeScript
+
+- Strict mode is on. Prefer `import type` / inline `import { type X, Y }` for types.
+- Path alias is `~/...` → `src/...`. Never use `@/`.
+- File names: `kebab-case.ts`. Prefer named exports except bot command handlers (default export).
+- Keep types near usage (`src/bot/types.ts`, schema `$infer*`). Ambient next-intl types live in `src/@types/i18n.ts`.
+- Format with Biome: **tabs**, line width **120**, **no trailing commas**. Do not introduce Prettier.
+- Prefer early returns over deep nesting. Match existing error handling (log + soft fail) unless the call site already throws.
+
+Canonical: `tsconfig.json`, `biome.json`, `src/configs/envs.ts`

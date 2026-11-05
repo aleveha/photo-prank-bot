@@ -1,0 +1,15 @@
+---
+description: Tailwind CSS and shadcn/ui conventions
+globs: "src/app/**/*.{ts,tsx,css},tailwind.config.ts,components.json"
+alwaysApply: false
+---
+
+# Tailwind + UI
+
+- Use `cn()` from `~/app/_utils/cn` (`clsx` + `tailwind-merge`) for conditional classes.
+- shadcn/ui lives in `src/app/_components/ui/`. Add primitives via the existing `components.json` aliases (`~/app/_components`, `~/app/_utils`).
+- Styling tokens: CSS variables in `src/app/globals.css`, mapped in `tailwind.config.ts`. Prefer existing theme tokens (`background`, `foreground`, `primary`, …) over one-off colors.
+- Dark mode is forced on `<html className="dark">`. Keep new UI consistent with that.
+- Prefer utility classes already used nearby. Avoid new design-system abstractions unless necessary.
+
+Canonical: `src/app/_utils/cn.ts`, `src/app/_components/ui/dropdown-menu.tsx`, `src/app/globals.css`, `components.json`

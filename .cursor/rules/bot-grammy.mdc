@@ -1,0 +1,17 @@
+---
+description: Grammy Telegram bot patterns
+globs: "src/bot/**/*.{ts,ftl}"
+alwaysApply: false
+---
+
+# Bot (grammy)
+
+- Entry: `src/bot/index.ts`. Context type: `src/bot/types.ts` (`Context = GrammyContext & I18nFlavor`).
+- **Commands** in `handlers/commands/`: **default export** named `handler`. Wired via dynamic import in `handlers/commands/index.ts`.
+- **Callbacks / events / middlewares**: **named** exports. Re-export through barrels (`export *`) when a folder has an `index.ts`.
+- Typical callback chain: `answerCallbackQuery` → rate limit → `verification` → handler (sometimes `mandatorySubscriptions` / `reportChatOnly`). Mirror nearby handlers.
+- Bot strings: Fluent files `src/bot/locales/{en,ru}.ftl`. Use `ctx.t("key")`. Keep both locales in sync. Do not put bot copy in next-intl JSON.
+- Bot-only HTTP helpers: `src/bot/services/` (ky). Shared DB access: `src/services/`.
+- Prefer HTML parse mode helpers already used (`parse-mode-transformer`, autoQuote).
+
+Canonical: `src/bot/index.ts`, `src/bot/handlers/commands/start.ts`, `src/bot/handlers/callbacks/language.ts`, `src/bot/middlewares/verification.ts`, `src/bot/locales/en.ftl`
