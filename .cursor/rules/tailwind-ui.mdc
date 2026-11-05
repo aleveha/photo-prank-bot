@@ -1,15 +1,17 @@
 ---
-description: Tailwind CSS and shadcn/ui conventions
-globs: "src/app/**/*.{ts,tsx,css},tailwind.config.ts,components.json"
+description: Tailwind CSS v4 and shadcn/ui conventions
+globs: "src/app/**/*.{ts,tsx,css},postcss.config.mjs,components.json"
 alwaysApply: false
 ---
 
 # Tailwind + UI
 
+- This repo uses **Tailwind v4** (`@import "tailwindcss"`, `@theme`, `@plugin` in CSS). There is **no** `tailwind.config.ts` — do not recreate one.
+- Theme tokens live in `src/app/globals.css` (`@theme` + CSS variables). Prefer existing tokens (`background`, `foreground`, `primary`, …) over one-off colors.
+- PostCSS uses `@tailwindcss/postcss` (`postcss.config.mjs`). Animation via `@plugin "tailwindcss-animate"`.
 - Use `cn()` from `~/app/_utils/cn` (`clsx` + `tailwind-merge`) for conditional classes.
-- shadcn/ui lives in `src/app/_components/ui/`. Add primitives via the existing `components.json` aliases (`~/app/_components`, `~/app/_utils`).
-- Styling tokens: CSS variables in `src/app/globals.css`, mapped in `tailwind.config.ts`. Prefer existing theme tokens (`background`, `foreground`, `primary`, …) over one-off colors.
-- Dark mode is forced on `<html className="dark">`. Keep new UI consistent with that.
+- shadcn/ui lives in `src/app/_components/ui/`. `components.json` has `"tailwind.config": ""` and points CSS at `src/app/globals.css`.
+- Dark mode uses `@custom-variant dark` and is forced on `<html className="dark">`. Keep new UI consistent with that.
 - Prefer utility classes already used nearby. Avoid new design-system abstractions unless necessary.
 
-Canonical: `src/app/_utils/cn.ts`, `src/app/_components/ui/dropdown-menu.tsx`, `src/app/globals.css`, `components.json`
+Canonical: `src/app/globals.css`, `src/app/_utils/cn.ts`, `src/app/_components/ui/dropdown-menu.tsx`, `components.json`, `postcss.config.mjs`
