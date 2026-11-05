@@ -5,7 +5,7 @@ Telegram photo-prank bot + Next.js Mini App. Prefer matching nearby code over in
 ## Stack
 
 - **Runtime / package manager:** Bun (`bun.lock`). Prefer `bun` over npm/yarn/pnpm.
-- **App:** Next.js 16 App Router, React 19, TypeScript (strict), Tailwind 3, shadcn/ui.
+- **App:** Next.js 16 App Router, React 19, TypeScript (strict), Tailwind 4, shadcn/ui.
 - **Bot:** grammy + Fluent (`.ftl`) locales.
 - **Web i18n:** next-intl + JSON in `src/app/_locales/`.
 - **DB:** PostgreSQL + Drizzle ORM.
