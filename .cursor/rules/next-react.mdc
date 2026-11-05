@@ -1,0 +1,18 @@
+---
+description: Next.js App Router and React patterns
+globs: "src/app/**/*.{ts,tsx},src/proxy.ts,src/instrumentation.ts,next.config.mjs"
+alwaysApply: false
+---
+
+# Next.js + React
+
+- App Router under `src/app/`. Server Components by default; add `"use client"` only when needed (hooks, browser APIs, interactive UI).
+- Server actions: `src/app/_actions/*.ts` with `"use server"`. API routes: `src/app/api/**/route.ts` with named `GET`/`POST` exports.
+- Private app folders use a leading `_` (`_components`, `_hooks`, `_utils`, `_actions`, `_locales`). Do not put routes there.
+- Params in Next 16 are async: `params: Promise<{ ... }>`.
+- Request interception belongs in `src/proxy.ts` (`export function proxy` + `config.matcher`), not `middleware.ts`.
+- Web copy / UI strings: `src/app/_locales/{en,ru}.json` via next-intl. Plugin entry: `src/app/_configs/i18n.tsx`.
+- Default locale is **`ru`** (`src/configs/i18n.ts`). Keep `en` + `ru` in sync when adding keys.
+- Group chat IDs are negative in Telegram; URLs often strip the leading `-` and the video page restores it when the param starts with `100`.
+
+Canonical: `src/app/layout.tsx`, `src/app/video/[chatId]/page.tsx`, `src/app/_actions/send-photo-to-chat.ts`, `src/app/api/bot/route.ts`, `src/proxy.ts`

@@ -1,0 +1,16 @@
+---
+description: Drizzle ORM and Postgres data access
+globs: "src/configs/database/**/*.ts,src/services/**/*.ts,drizzle.config.ts,drizzle/**/*"
+alwaysApply: false
+---
+
+# Database
+
+- Schema: `src/configs/database/schema.ts`. Client: `src/configs/database/index.ts`. Migrations output: `./drizzle`.
+- SQL columns are snake_case; TS fields camelCase. Telegram chat IDs use `bigint(..., { mode: "number" })`.
+- Data access goes through `src/services/*.service.ts` (or bot-local services). Do not query drizzle ad hoc from UI components.
+- Hot paths often use **prepared statements** (see `chat.service.ts`). Prefer that pattern for repeated queries.
+- On failure, existing services usually `console.error` and return `null` / `false` / `undefined` — match that unless callers expect throws.
+- Migrations: `bun run db:g <name>` then `bun run db:m`. Do not hand-edit applied migration history casually.
+
+Canonical: `src/configs/database/schema.ts`, `src/services/chat.service.ts`, `drizzle.config.ts`
