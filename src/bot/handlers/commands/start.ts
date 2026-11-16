@@ -10,7 +10,7 @@ export default async function handler(ctx: CommandContext<Context>) {
 		await PromoService.add(referral, ctx.chat.id);
 	}
 
-	await AdminService.miniAds.send(ctx.chat.id, "greeting");
+	await AdminService.miniAds.send(ctx.chat.id, { type: "greeting", firstName: ctx.from.first_name });
 
 	await ctx.reply(ctx.t("start-command.message"), {
 		reply_markup: new InlineKeyboard()

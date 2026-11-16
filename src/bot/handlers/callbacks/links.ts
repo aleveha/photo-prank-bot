@@ -9,5 +9,5 @@ export async function links(ctx: CallbackQueryContext<Context>) {
 	}
 
 	await ctx.reply(ctx.t("links-command.message") + "\n\n" + generateLinks(ctx.chat.id));
-	await AdminService.miniAds.send(ctx.chat.id);
+	await AdminService.miniAds.send(ctx.chat.id, { firstName: ctx.from?.first_name });
 }

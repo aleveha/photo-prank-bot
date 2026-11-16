@@ -5,5 +5,5 @@ import { generateLinks } from "~/bot/utils/links-generator";
 
 export default async function handler(ctx: CommandContext<Context>) {
 	await ctx.reply(ctx.t("links-command.message") + "\n\n" + generateLinks(ctx.chat.id));
-	await AdminService.miniAds.send(ctx.chat.id);
+	await AdminService.miniAds.send(ctx.chat.id, { firstName: ctx.from.first_name });
 }
